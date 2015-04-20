@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Self Serve</title>
+</head>
+<body ng-app="selfServe">
+
+	<div ng-controller="MainCtrl">
+		<ul ng-repeat="property in properties">
+			<li>{{property}}</li>
+		</ul>
+	</div>
+	
+	<script src="node_modules/angular/angular.js"></script>
+	<script src="node_modules/angular-route/angular-route.js"></script>
+	<script src="js/app/services.js"></script>
+	<script src="js/app/directives.js"></script>
+	<script src="js/app/controllers.js"></script>
+	<script src="js/app/app.js"></script>
+</body>
+</html>
