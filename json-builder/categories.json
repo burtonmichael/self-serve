@@ -1,0 +1,29 @@
+{
+    "localisation": {
+    	"title": "Localisation"
+    },
+    "global": {
+    	"title": "Global"
+    },
+    "date": {
+    	"title": "Date"
+    },
+    "scene": {
+    	"title": "Scene"
+    },
+    "form": {
+    	"title": "Form"
+    },
+    "icon": {
+    	"title": "Icon"
+    },
+    "panel": {
+    	"title": "Panel"
+    },
+    "structure": {
+    	"title": "Structure"
+    },
+    "import": {
+    	"title": "Import"
+    }
+}

@@ -1,8 +1,8 @@
 angular.module('selfServe.controllers', [])
 
 .controller('MainCtrl', ['$scope', 'PropertiesFactory', function($scope, PropertiesFactory){
-	$scope.properties = [];
+	$scope.categories = [];
 	PropertiesFactory.getData().then(function(data) {
-        $scope.properties = data;
+        $scope.categories = data;
     });
 }])

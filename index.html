@@ -7,11 +7,15 @@
 <body ng-app="selfServe">
 
 	<div ng-controller="MainCtrl">
-		<ul ng-repeat="property in properties">
-			<li>{{property}}</li>
+		<ul ng-repeat="category in categories">
+			<li><a href="#">{{category.title}}</a>
+				<ul ng-repeat="property in category.properties">
+					<li>{{property.title}}</li>
+				</ul>
+			</li>
 		</ul>
 	</div>
-	
+
 	<script src="node_modules/angular/angular.js"></script>
 	<script src="node_modules/angular-route/angular-route.js"></script>
 	<script src="js/app/services.js"></script>
