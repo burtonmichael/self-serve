@@ -1,15 +1,20 @@
 angular.module('selfServe.services', [])
 
-.factory('PropertiesFactory', ['$http', '$q', function($http, $q){
+.factory('DataService', ['$http', '$q', function($http, $q){
 	return {
-		getData: function() {
-			var defer = $q.defer();
-			$http.get('js/data/properties/properties.json', { cache: 'true'})
-				.success(function(data) {
-					defer.resolve(data);
-				});
+		get: function() {
+			var promise = null;
+			if (promise) {
+				return promise;
+			} else {
+				var defer = $q.defer();
+				var promise = $http.get('js/data/properties.json', { cache: 'true'})
+					.success(function(data) {
+						defer.resolve(data);
+					});
 
-			return defer.promise;
+				return defer.promise;
+			}
 		}
 	}
 }])

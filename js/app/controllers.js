@@ -1,8 +1,22 @@
 angular.module('selfServe.controllers', [])
 
-.controller('MainCtrl', ['$scope', 'PropertiesFactory', function($scope, PropertiesFactory){
+.controller('MainCtrl', ['$scope', 'DataService', 'localStorageService', function($scope, DataService, localStorageService){
 	$scope.categories = [];
-	PropertiesFactory.getData().then(function(data) {
+	DataService.get().then(function(data) {
         $scope.categories = data;
     });
+
+    $scope.addItem = function(item) {
+    	localStorageService.set(item, 'Add this!');
+    	alert(localStorageService.get(item))
+    }
+}])
+
+.controller('categoryCtrl', ['$scope', 'DataService', 'localStorageService', function($scope, DataService, localStorageService, $routeParams){
+	console.log($routeParams);
+	$scope.category = $routeParams.category
+}])
+
+.controller('propertyCtrl', ['$scope', 'DataService', 'localStorageService', function($scope, DataService, localStorageService, $routeParams){
+	$scope.property = $routeParams.property
 }])
