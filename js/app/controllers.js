@@ -1,22 +1,32 @@
 angular.module('selfServe.controllers', [])
 
-.controller('MainCtrl', ['$scope', 'DataService', 'localStorageService', function($scope, DataService, localStorageService){
-	$scope.categories = [];
+.controller('MainCtrl', ['$scope', 'DataService', '$routeParams', function($scope, DataService, $routeParams){
+	$scope.categories = {};
+    $scope.active = {};
+    $scope.$on('$routeChangeSuccess', function() {
+        $scope.active.category = $routeParams.category;
+        $scope.active.property = $routeParams.property;
+    });
 	DataService.get().then(function(data) {
         $scope.categories = data;
     });
+}])
 
-    $scope.addItem = function(item) {
-    	localStorageService.set(item, 'Add this!');
-    	alert(localStorageService.get(item))
+.controller('categoryCtrl', ['$scope', 'DataService', 'PropertiesService', '$routeParams', 'preloadData', function($scope, DataService, PropertiesService, $routeParams, preloadData){
+    $scope.categories = preloadData;
+    $scope.category = preloadData[$routeParams.category];
+
+    $scope.setProperty = function(key, value) {
+        PropertiesService.setProperty(key, value);
+    }
+
+    $scope.getProperty = function(key) {
+        console.log(PropertiesService.getProperty(key));
     }
 }])
 
-.controller('categoryCtrl', ['$scope', 'DataService', 'localStorageService', function($scope, DataService, localStorageService, $routeParams){
-	console.log($routeParams);
-	$scope.category = $routeParams.category
-}])
-
-.controller('propertyCtrl', ['$scope', 'DataService', 'localStorageService', function($scope, DataService, localStorageService, $routeParams){
-	$scope.property = $routeParams.property
+.controller('propertyCtrl', ['$scope', 'DataService', 'PropertiesService', '$routeParams', 'preloadData', function($scope, DataService, PropertiesService, $routeParams, preloadData){
+    $scope.categories = preloadData;
+    $scope.category = preloadData[$routeParams.category];
+    $scope.property = $scope.category.properties[$routeParams.property];
 }])

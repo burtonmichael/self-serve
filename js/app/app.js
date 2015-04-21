@@ -11,11 +11,21 @@ var selfServe = angular.module('selfServe', [
         $routeProvider.
         when('/:category', {
             templateUrl: 'templates/category.html',
-            controller: 'categoryCtrl'
+            controller: 'categoryCtrl',
+            resolve: {
+                preloadData: function(DataService){
+                    return DataService.get();
+                }
+            }
         }).
         when('/:category/:property', {
             templateUrl: 'templates/property.html',
-            controller: 'propertyCtrl'
+            controller: 'propertyCtrl',
+            resolve: {
+                preloadData: function(DataService){
+                    return DataService.get();
+                }
+            }
         }).
         otherwise({
             redirectTo: '/'

@@ -3,20 +3,31 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Self Serve</title>
+	<link href="https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/base.css">
 </head>
 <body ng-app="selfServe">
-
-	<div ng-controller="MainCtrl">
-		<ul ng-repeat="category in categories">
-			<li><a href="#/{{category.parameter}}">{{category.title}}</a>
-				<ul ng-repeat="property in category.properties">
-					<li><a href="#/{{category.parameter}}/{{property.parameter}}">{{property.title}}</a></li>
-				</ul>
-			</li>
-		</ul>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="navigation" ng-controller="MainCtrl">
+					<ul class="categories" ng-repeat="category in categories">
+						<li ng-class="{'active': active.category == category.parameter}"><a href="#/{{category.parameter}}">{{category.title}}</a>
+							<ul class="properties" ng-repeat="property in category.properties">
+								<li ng-class="{'active': active.property == property.parameter}">
+									<a href="#/{{category.parameter}}/{{property.parameter}}">{{property.title}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<ng-view></ng-view>
+			</div>
+		</div>
 	</div>
-
-	<ng-view></ng-view>
 
 	<script src="library/angular/angular.js"></script>
 	<script src="library/angular-route/angular-route.js"></script>
@@ -25,5 +36,6 @@
 	<script src="js/app/directives.js"></script>
 	<script src="js/app/controllers.js"></script>
 	<script src="js/app/app.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </body>
 </html>
