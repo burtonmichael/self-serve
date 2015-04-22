@@ -42,7 +42,7 @@ var selfServe = angular.module('selfServe', [
 	function($rootScope, $location, PropertiesService) {
 		$rootScope.$on("$locationChangeStart", function(event, next, current) {
 			if (PropertiesService.getProperty('affiliateCode') == null) {
-				if (next.templateUrl != "partials/start.html") {
+				if (next.templateUrl != "templates/start.html") {
 					$location.path("/start");
 				}
 			}
