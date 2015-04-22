@@ -35,18 +35,14 @@ body {
 	background-color: #EBEBEB;
 }
 
-.container-category {
-	padding: 24px;
+section {
+	padding: 12px 24px 24px;
 	background-color: #F7F7F9;
+	margin-bottom: 24px;
 }
 
-.container-property {
-	padding: 24px;
-	background-color: #F7F7F9;
-}
-
-.container-category .container-property {
-	background-color: #EFEFEF;
+.leading {
+	background-color: #EBEBEB;
 }
 
 .properties {
@@ -63,4 +59,22 @@ body {
 
 .build a {
 
+}
+
+
+
+.snippet kbd {
+	background-color: #272F32;
+}
+
+.snippet-key {
+	color: #9DBDC6;
+}
+
+.snippet-value {
+	color: #FF3D2E;
+}
+
+.alert-input {
+	margin-top: 20px;
 }

@@ -31,7 +31,7 @@ angular.module('selfServe.services', [])
 		return localStorageObject[key];
 	}
 
-	factory.setProperty = function(key, value) {
+	factory.setProperty = function(key, value, restrict) {
 		localStorageObject[key] = value;
 		localStorageService.set("serve", localStorageObject);
 	}

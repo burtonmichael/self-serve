@@ -1,10 +1,10 @@
-<div class="container-category">
+<section class="leading">
 	<h2>{{category.parameter | title}}</h2>
 	<p>
 		This is an overview of paramters avaiable in this section. If you wish to view more detail, please select the sub-section from the left.
 	</p>
-	<hr>
-	<div class="container-property" ng-repeat="property in category.properties">
-		<div property-text property="property"></div>
-	</div>
-</div>
+</section>
+
+<section ng-repeat="property in category.properties">
+	<div property-input property="property"></div>
+</section>
