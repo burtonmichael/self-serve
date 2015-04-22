@@ -15,14 +15,6 @@ angular.module('selfServe.controllers', [])
 .controller('categoryCtrl', ['$scope', 'DataService', 'PropertiesService', '$routeParams', 'preloadData', function($scope, DataService, PropertiesService, $routeParams, preloadData){
     $scope.categories = preloadData;
     $scope.category = preloadData[$routeParams.category];
-
-    $scope.setProperty = function(key, value) {
-        PropertiesService.setProperty(key, value);
-    }
-
-    $scope.getProperty = function(key) {
-        console.log(PropertiesService.getProperty(key));
-    }
 }])
 
 .controller('propertyCtrl', ['$scope', 'DataService', 'PropertiesService', '$routeParams', 'preloadData', function($scope, DataService, PropertiesService, $routeParams, preloadData){

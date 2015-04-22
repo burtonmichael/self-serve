@@ -10,16 +10,31 @@
 <body ng-app="selfServe">
 	<div class="container">
 		<div class="row">
+			<div class="col-md-12 text-center">
+				<img src="img/ice-cream.jpg" alt="">
+				<h1><strong>Soft Serve</strong></h1>
+				<kbd>Self serve software</kbd>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-4">
 				<div class="navigation" ng-controller="MainCtrl">
+					<ul class="start">
+						<li class="alert-info"><a class="alert-link" href="#/start">Start</a></li>
+					</ul>
 					<ul class="categories" ng-repeat="category in categories">
-						<li ng-class="{'active': active.category == category.parameter}"><a href="#/{{category.parameter}}">{{category.title}}</a>
+						<li ng-class="{'active': active.category == category.parameter}"><a category-title category="category.parameter" active="active"></a>
 							<ul class="properties" ng-repeat="property in category.properties">
 								<li ng-class="{'active': active.property == property.parameter}">
 									<a href="#/{{category.parameter}}/{{property.parameter}}">{{property.title}}</a>
 								</li>
 							</ul>
 						</li>
+					</ul>
+					<ul class="build">
+						<li class="alert-success"><a class="alert-link" href="#/build">Build</a></li>
+						<li class="alert-danger"><a class="alert-link" href="#/reset">Reset</a></li>
 					</ul>
 				</div>
 			</div>
@@ -35,6 +50,7 @@
 	<script src="js/app/services.js"></script>
 	<script src="js/app/directives.js"></script>
 	<script src="js/app/controllers.js"></script>
+	<script src="js/app/filters.js"></script>
 	<script src="js/app/app.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </body>

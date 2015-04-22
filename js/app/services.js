@@ -25,18 +25,25 @@ angular.module('selfServe.services', [])
 
 	var localStorageObject = localStorageService.get("serve") || {};
 
+	localStorageService.set("serve", localStorageObject);
+
 	factory.getProperty = function(key) {
 		return localStorageObject[key];
 	}
 
 	factory.setProperty = function(key, value) {
 		localStorageObject[key] = value;
-		localStorageService.set("serve", JSON.stringify(localStorageObject));
+		localStorageService.set("serve", localStorageObject);
 	}
 
 	factory.resetProperties = function() {
 		localStorageObject = {};
-		localStorageService.set("serve", "");
+		localStorageService.set("serve", localStorageObject);
+	}
+
+	factory.resetProperty = function(key) {
+		delete localStorageObject[key];
+		localStorageService.set("serve", localStorageObject);
 	}
 
 	return factory;

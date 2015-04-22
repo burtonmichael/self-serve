@@ -23,10 +23,44 @@ body {
 	font-weight: 700;
 }
 
-.categories .active > a {
+.categories {
+	background-color: #F7F7F9;
+}
+
+.categories > .active > a {
 	background-color: #E3E3E3;
 }
 
-.properties .active > a {
+.properties .active {
+	background-color: #EBEBEB;
+}
+
+.container-category {
+	padding: 24px;
+	background-color: #F7F7F9;
+}
+
+.container-property {
+	padding: 24px;
+	background-color: #F7F7F9;
+}
+
+.container-category .container-property {
 	background-color: #EFEFEF;
+}
+
+.properties {
+	display: none;
+}
+
+.properties a {
+	margin-left: 24px;
+}
+
+.build li, ul.categories {
+	margin-top: 12px;
+}
+
+.build a {
+
 }

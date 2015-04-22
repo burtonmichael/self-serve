@@ -1,9 +1,10 @@
-{{category}}
-
-<input ng-model="set" name="" type="text">
-
-<input ng-model="get" name="" type="text">
-
-<button ng-click="setProperty('test', set)">Set</button>
-
-<button ng-click="getProperty(get)">Get</button>
+<div class="container-category">
+	<h2>{{category.parameter | title}}</h2>
+	<p>
+		This is an overview of paramters avaiable in this section. If you wish to view more detail, please select the sub-section from the left.
+	</p>
+	<hr>
+	<div class="container-property" ng-repeat="property in category.properties">
+		<div property-text property="property"></div>
+	</div>
+</div>
