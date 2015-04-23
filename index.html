@@ -23,14 +23,7 @@
 					<ul class="start">
 						<li class="alert-info"><a class="alert-link" href="#/start">Start</a></li>
 					</ul>
-					<ul class="categories" ng-repeat="category in categories">
-						<li ng-class="{'active': active.category == category.parameter}"><a category-title category="category.parameter" active="active.category"></a>
-							<ul class="properties">
-								<li ng-class="{'active': active.property == property.parameter}" ng-repeat="property in category.properties">
-									<a href="#/{{category.parameter}}/{{property.parameter}}">{{property.title}}</a>
-								</li>
-							</ul>
-						</li>
+					<ul categories category="category" ng-repeat="category in categories">
 					</ul>
 					<ul class="build">
 						<li class="alert-success"><a class="alert-link" href="#/build">Build</a></li>
@@ -52,6 +45,5 @@
 	<script src="js/app/controllers.js"></script>
 	<script src="js/app/filters.js"></script>
 	<script src="js/app/app.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </body>
 </html>

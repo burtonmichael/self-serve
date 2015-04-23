@@ -55,20 +55,31 @@ angular.module('selfServe.directives', [])
 		restrict: 'A',
 		templateUrl: 'templates/category-title.html',
 		replace: true,
-		link: function($scope, $element, $attrs, $transclude) {
-			var $prop = $($element.next());
-
-			if( $scope.category == $scope.active ) {
-				$prop.slideDown(400);
+		link: function($scope, iElm, iAttrs, controller) {
+			var len = 0;
+			for (var o in $scope.category.properties) {
+			    len++;
 			}
-			
-			$scope.$watch('active', function(newValue) {
-				if( $scope.category == newValue ) {
-					$prop.slideDown(400);
-				} else {
-					$prop.slideUp(400);
-				}
-			});
+			$scope.length = len;
+		}
+	};
+})
+
+.directive('categories', function(){
+	return {
+		scope: {
+			category: '=categories',
+			active: '=active'
+		},
+		restrict: 'A',
+		templateUrl: 'templates/category-title.html',
+		replace: true,
+		link: function($scope, iElm, iAttrs, controller) {
+			var len = 0;
+			for (var o in $scope.category.properties) {
+			    len++;
+			}
+			$scope.length = len;
 		}
 	};
 });

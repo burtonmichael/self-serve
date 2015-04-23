@@ -1,0 +1,8 @@
+<li ng-class="{'active': active.category == category.parameter}">
+	<a category-title category="category.parameter" active="active.category"></a>
+	<ul ng-class="'properties-items-' + length" ng-show="active.category == category.parameter" class="properties">
+		<li ng-class="{'active': active.property == property.parameter}" ng-repeat="property in category.properties">
+			<a href="#/{{category.parameter}}/{{property.parameter}}">{{property.title}}</a>
+		</li>
+	</ul>
+</li>
