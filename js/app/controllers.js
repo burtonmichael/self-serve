@@ -1,20 +1,5 @@
 angular.module('selfServe.controllers', [])
 
-.controller('MainCtrl', ['$scope', 'DataService', '$routeParams', function($scope, DataService, $routeParams){
-	$scope.categories = {};
-    $scope.active = {
-        category: null,
-        property: null
-    };
-    $scope.$on('$routeChangeSuccess', function() {
-        $scope.active.category = $routeParams.category;
-        $scope.active.property = $routeParams.property;
-    });
-	DataService.get().then(function(data) {
-        $scope.categories = data;
-    });
-}])
-
 .controller('categoryCtrl', ['$scope', '$routeParams', 'preloadData', function($scope, $routeParams, preloadData){
     $scope.categories = preloadData;
     $scope.category = preloadData[$routeParams.category];

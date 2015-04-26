@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Self Serve</title>
-	<link href="https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+	<link href="css/fonts.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/base.css">
 </head>
 <body ng-app="selfServe">
@@ -19,12 +19,11 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<div class="navigation" ng-controller="MainCtrl">
+				<div class="navigation">
 					<ul class="start">
 						<li class="alert-info"><a class="alert-link" href="#/start">Start</a></li>
 					</ul>
-					<ul categories category="category" ng-repeat="category in categories">
-					</ul>
+					<ul categories></ul>
 					<ul class="build">
 						<li class="alert-success"><a class="alert-link" href="#/build">Build</a></li>
 						<li class="alert-danger"><a class="alert-link" href="#/reset">Reset</a></li>

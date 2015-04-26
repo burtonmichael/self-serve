@@ -39,47 +39,36 @@ angular.module('selfServe.directives', [])
 			}
 		},
 		restrict: 'A',
-		templateUrl: 'templates/property-text.html',
-		link: function($scope, iElm, iAttrs, controller) {
-
-		}
+		templateUrl: 'templates/property-text.html'
 	};
 }])
 
-.directive('categoryTitle', function(){
+.directive('categories', ['DataService', '$routeParams', function(DataService, $routeParams){
 	return {
-		scope: {
-			category: '=category',
-			active: '=active'
+		scope: {},
+		controller: function($scope, DataService, $routeParams){
+			$scope.categories = {};
+			DataService.get().then(function(data) {
+			    $scope.categories = data;
+			});
+			$scope.count = function(category) {
+				var len = 0;
+				for (var o in category.properties) {
+				    len++;
+				}
+				return "properties-length-" + len;
+			}
+			$scope.active = {
+			    category: null,
+			    property: null
+			};
+			$scope.$on('$routeChangeSuccess', function() {
+			    $scope.active.category = $routeParams.category;
+			    $scope.active.property = $routeParams.property;
+			});
 		},
 		restrict: 'A',
-		templateUrl: 'templates/category-title.html',
-		replace: true,
-		link: function($scope, iElm, iAttrs, controller) {
-			var len = 0;
-			for (var o in $scope.category.properties) {
-			    len++;
-			}
-			$scope.length = len;
-		}
+		templateUrl: 'templates/categories.html',
+		replace: false
 	};
-})
-
-.directive('categories', function(){
-	return {
-		scope: {
-			category: '=categories',
-			active: '=active'
-		},
-		restrict: 'A',
-		templateUrl: 'templates/category-title.html',
-		replace: true,
-		link: function($scope, iElm, iAttrs, controller) {
-			var len = 0;
-			for (var o in $scope.category.properties) {
-			    len++;
-			}
-			$scope.length = len;
-		}
-	};
-});
+}])
