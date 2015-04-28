@@ -1,5 +1,7 @@
 <section>
-	<div property-input property="property"></div>
+	<h3>{{property.title}}</h3>
+	<p>{{property.description}}</p>
+	<div ng-controller="inputCtrl" ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
 	<hr>
 	<div class="snippet">
 		<h4>Url parameter.</h4>
@@ -7,5 +9,12 @@
 		<kbd>&<span class="snippet-key">{{property.snippet.key}}</span>=<span class="snippet-value">{{property.snippet.value}}</span></kbd>
 	</div>
 	<hr>
+	<div class="images">
+		<div class="image" ng-repeat="image in property.images">
+			<img class="img-responsive" ng-src="{{image.src}}" alt="{{image.caption}}">
+			<p class="caption">
+				{{image.caption}}
+			</p>
+		</div>
+	</div>
 </section>
-	{{property}}

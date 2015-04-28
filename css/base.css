@@ -74,3 +74,33 @@ section {
 .alert-input {
 	margin-top: 20px;
 }
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all linear 0.3s;
+  transition: all linear 0.3s;
+}
+
+.properties {
+	overflow: hidden;
+}
+
+.animate-show.ng-hide {
+	height: 0;
+}
+
+.properties-length-1 {
+	height: 48px;
+}
+
+.properties-length-2 {
+	height: 96px;
+}
+
+.properties-length-3 {
+	height: 144px;
+}
+
+.properties-length-4 {
+	height: 192px;
+}

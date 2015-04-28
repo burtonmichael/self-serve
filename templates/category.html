@@ -6,5 +6,7 @@
 </section>
 
 <section ng-repeat="property in category.properties">
-	<div property-input property="property"></div>
+	<h3>{{property.title}}</h3>
+	<p>{{property.description}}</p>
+	<div ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
 </section>

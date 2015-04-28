@@ -39,7 +39,7 @@ angular.module('selfServe.directives', [])
 			}
 		},
 		restrict: 'A',
-		templateUrl: 'templates/property-text.html'
+		templateUrl: 'templates/inputs/text.html'
 	};
 }])
 

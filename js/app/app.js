@@ -12,7 +12,12 @@ var selfServe = angular.module('selfServe', [
 		$routeProvider.
 		when('/start', {
 			templateUrl: 'templates/start.html',
-			controller: 'startCtrl'
+			controller: 'startCtrl',
+			resolve: {
+				preloadData: function(DataService) {
+					return DataService.get();
+				}
+			}
 		}).
 		when('/:category', {
 			templateUrl: 'templates/category.html',
