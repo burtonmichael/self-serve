@@ -25,15 +25,18 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	}, true);
 }])
 
-.controller('inputCtrl', ['$scope', '$rootScope', 'PropertiesService', function($scope, $rootScope, PropertiesService){
+.controller('inputCtrl', ['$scope', '$rootScope', '$filter', 'PropertiesService', function($scope, $rootScope, $filter, PropertiesService){
 	$scope.property.value = PropertiesService.getProperty($scope.property.parameter) || '';
 
 	$scope.attempted = false;
 	$scope.success = false;
 	$scope.error = "";
 
+	if ($scope.property.input.options && $scope.property.value)
+		$scope.preset = $filter('filter')($scope.property.input.options, {value: $scope.property.value});
+
 	$scope.setProperty = function(key, value, restrict) {
-		var value = value.split(" ").join("");
+		var value = value ? value.split(" ").join("") : "";
 		var valid = false;
 		var error;
 

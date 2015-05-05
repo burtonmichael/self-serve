@@ -1,6 +1,6 @@
 <div class="input-group">
-	<span ng-if="property.input.prefix" class="input-group-addon">{{property.input.prefix}}</span>
 	<select class="form-control" ng-options="option as option.label for option in property.input.options track by option.value" ng-model="selected">
+		<option value="" disabled>{{preset[0].label || "Please Select " + property.title}}</option>
 	</select>
 	<span class="input-group-btn">
 		<button ng-click="setProperty(property.parameter, selected.value, property.input.restrict)" class="btn btn-default" ng-class="{ 'btn-success': success, 'btn-danger': attempted && !success }" type="button">Save</button>
