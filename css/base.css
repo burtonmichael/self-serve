@@ -2,13 +2,17 @@ body {
 	font-family: 'RobotoDraft', sans-serif;
 }
 
-.navigation ul {
+.navigation, .navigation ul {
 	padding: 0;
 	margin: 0;
 }
 
 .navigation li {
 	list-style: none;
+}
+
+.navigation > li {
+	margin-bottom: 24px;
 }
 
 .navigation li a {
@@ -19,15 +23,15 @@ body {
 	color: #333;
 }
 
-.navigation > ul > li > a {
+.navigation > li > a {
 	font-weight: 700;
 }
 
-.categories {
+.categories li {
 	background-color: #F7F7F9;
 }
 
-.categories > .active > a {
+.categories > .active {
 	background-color: #E3E3E3;
 }
 
@@ -45,11 +49,20 @@ section {
 	background-color: #EBEBEB;
 }
 
-.properties a {
+.categories > li > a {
+	font-weight: bold;
 	margin-left: 24px;
 }
 
-.build li, ul.categories {
+.properties li {
+	background-color: #f2f2f2;
+}
+
+.properties a {
+	margin-left: 42px;
+}
+
+.build li, {
 	margin-top: 12px;
 }
 

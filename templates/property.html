@@ -8,13 +8,15 @@
 		<p>The parameter takes the following form in the url.</p>
 		<kbd>&<span class="snippet-key">{{property.snippet.key}}</span>=<span class="snippet-value">{{property.snippet.value}}</span></kbd>
 	</div>
-	<hr>
-	<div class="images">
-		<div class="image" ng-repeat="image in property.images">
-			<img class="img-responsive" ng-src="{{image.src}}" alt="{{image.caption}}">
-			<p class="caption">
-				{{image.caption}}
-			</p>
+	<div ng-if="property.images.length >= 1">
+		<hr>
+		<div class="images">
+			<div class="image" ng-repeat="image in property.images">
+				<img class="img-responsive" ng-src="{{image.src}}" alt="{{image.caption}}">
+				<p class="caption">
+					{{image.caption}}
+				</p>
+			</div>
 		</div>
 	</div>
 </section>

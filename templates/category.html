@@ -8,5 +8,5 @@
 <section ng-repeat="property in category.properties">
 	<h3>{{property.title}}</h3>
 	<p>{{property.description}}</p>
-	<div ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
+	<div ng-controller="inputCtrl" ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
 </section>

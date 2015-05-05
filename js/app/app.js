@@ -1,5 +1,6 @@
 var selfServe = angular.module('selfServe', [
 	'ngRoute',
+	'colorpicker.module',
 	'LocalStorageModule',
 	'selfServe.services',
 	'selfServe.controllers',
@@ -18,6 +19,10 @@ var selfServe = angular.module('selfServe', [
 					return DataService.get();
 				}
 			}
+		}).
+		when('/reset', {
+			templateUrl: 'templates/reset.html',
+			controller: 'resetCtrl'
 		}).
 		when('/:category', {
 			templateUrl: 'templates/category.html',
@@ -45,9 +50,10 @@ var selfServe = angular.module('selfServe', [
 
 .run(['$rootScope', '$location', 'PropertiesService',
 	function($rootScope, $location, PropertiesService) {
-		$rootScope.$on("$locationChangeStart", function(event, next, current) {
-			if (PropertiesService.getProperty('affiliateCode') == null) {
-				if (next.templateUrl != "templates/start.html") {
+		$rootScope.affiliateCode = PropertiesService.getProperty("affiliateCode");
+		$rootScope.$on("$routeChangeStart", function(event, next, current) {
+			if (!$rootScope.affiliateCode) {
+				if (next.$$route.templateUrl != "templates/start.html" && next.$$route.templateUrl != "templates/reset.html") {
 					$location.path("/start");
 				}
 			}

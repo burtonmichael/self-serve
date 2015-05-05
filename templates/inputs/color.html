@@ -1,6 +1,5 @@
 <div class="input-group">
-	<span ng-if="property.input.prefix" class="input-group-addon">{{property.input.prefix}}</span>
-	<input type="text" class="form-control" ng-model="property.value" placeholder="{{property.input.placeholder}}">
+	<input colorpicker type="text" class="form-control" ng-model="property.value" placeholder="{{property.input.placeholder}}">
 	<span class="input-group-btn">
 		<button ng-click="setProperty(property.parameter, property.value, property.input.restrict)" class="btn btn-default" ng-class="{ 'btn-success': success, 'btn-danger': attempted && !success }" type="button">Save</button>
 		<button ng-click="resetProperty(property.parameter)" class="btn btn-default" type="button">Reset</button>

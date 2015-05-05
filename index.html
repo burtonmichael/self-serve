@@ -5,6 +5,7 @@
 	<title>Self Serve</title>
 	<link href="css/fonts.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.min.css">
 	<link rel="stylesheet" href="css/base.css">
 </head>
 <body ng-app="selfServe">
@@ -19,16 +20,14 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<div class="navigation">
-					<ul class="start">
-						<li class="alert-info"><a class="alert-link" href="#/start">Start</a></li>
-					</ul>
-					<ul class="categories" categories></ul>
-					<ul class="build">
-						<li class="alert-success"><a class="alert-link" href="#/build">Build</a></li>
-						<li class="alert-danger"><a class="alert-link" href="#/reset">Reset</a></li>
-					</ul>
-				</div>
+				<ul class="navigation" ng-controller="navigationCtrl">
+					<li class="alert-info"><a class="alert-link" href="#/start">Start</a></li>
+					<li ng-if="started" class="alert-warning"><a class="alert-link">Customise</a>
+						<ul class="categories" categories></ul>
+					</li>
+					<li ng-if="started" class="alert-success"><a class="alert-link" href="#/build">Build</a></li>
+					<li class="alert-danger"><a class="alert-link" href="#/reset">Reset</a></li>
+				</ul>
 			</div>
 			<div class="col-md-8">
 				<ng-view></ng-view>
@@ -36,10 +35,11 @@
 		</div>
 	</div>
 
-	<script src="library/angular/angular.js"></script>
-	<script src="library/angular-route/angular-route.js"></script>
-	<script src="library/angular-animate/angular-animate.js"></script>
-	<script src="library/angular-local-storage/dist/angular-local-storage.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+	<script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
 	<script src="js/app/services.js"></script>
 	<script src="js/app/directives.js"></script>
 	<script src="js/app/controllers.js"></script>

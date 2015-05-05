@@ -1,8 +1,12 @@
 <section class="leading">
 	<h2>Welcome</h2>
+	<p>
+		This is an overview of paramters avaiable in this section. If you wish to view more detail, please select the sub-section from the left.
+	</p>
 </section>
 
-<section>
-	<div class="input-group">
-	</div>
+<section ng-repeat="property in base">
+	<h3>{{property.title}}</h3>
+	<p>{{property.description}}</p>
+	<div ng-controller="inputCtrl" ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
 </section>
