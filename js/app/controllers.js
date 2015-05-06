@@ -15,6 +15,19 @@ angular.module('selfServe.controllers', ['ngAnimate'])
     $scope.base = preloadData.base;
 }])
 
+.controller('buildCtrl', ['$scope', 'PropertiesService', function($scope, PropertiesService){
+
+}])
+
+.controller('resetCtrl', ['$scope', '$rootScope', 'PropertiesService', function($scope, $rootScope, PropertiesService){
+	$scope.confirm = false;
+
+	$scope.reset = function(key) {
+		PropertiesService.resetProperties();
+		$rootScope.affiliateCode = undefined;
+	}
+}])
+
 .controller('navigationCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
 	$scope.started = $rootScope.affiliateCode;
 
@@ -32,7 +45,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	$scope.success = false;
 	$scope.error = "";
 
-	if ($scope.property.input.options && $scope.property.value)
+	if ($scope.property.input.type === "select" && $scope.property.value)
 		$scope.preset = $filter('filter')($scope.property.input.options, {value: $scope.property.value});
 
 	$scope.setProperty = function(key, value, restrict) {
@@ -86,6 +99,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 		$scope.property.value = '';
 		$scope.attempted = false;
         $scope.success = false;
+        $scope.preset = null;
 		if (key == "affiliateCode") 
 			$rootScope.affiliateCode = undefined;
 	}

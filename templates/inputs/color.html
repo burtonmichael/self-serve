@@ -5,7 +5,7 @@
 		<button ng-click="resetProperty(property.parameter)" class="btn btn-default" type="button">Reset</button>
 	</span>
 </div>
-<div ng-if="attempted && !success" class="alert alert-danger alert-input" role="alert">
+<div ng-show="attempted && !success" class="alert alert-danger alert-input" role="alert">
 	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 	<span class="sr-only">Error:</span>
 	Please check and try again. <strong>{{error}}</strong>

@@ -20,6 +20,13 @@ var selfServe = angular.module('selfServe', [
 				}
 			}
 		}).
+		when('/customise', {
+			templateUrl: 'templates/customise.html'
+		}).
+		when('/build', {
+			templateUrl: 'templates/build.html',
+			controller: 'buildCtrl'
+		}).
 		when('/reset', {
 			templateUrl: 'templates/reset.html',
 			controller: 'resetCtrl'

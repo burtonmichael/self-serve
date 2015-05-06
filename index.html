@@ -3,8 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Self Serve</title>
-	<link href="css/fonts.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.min.css">
 	<link rel="stylesheet" href="css/base.css">
 </head>
@@ -22,7 +21,7 @@
 			<div class="col-md-4">
 				<ul class="navigation" ng-controller="navigationCtrl">
 					<li class="alert-info"><a class="alert-link" href="#/start">Start</a></li>
-					<li ng-if="started" class="alert-warning"><a class="alert-link">Customise</a>
+					<li ng-if="started" class="alert-warning"><a href="#/customise" class="alert-link">Customise</a>
 						<ul class="categories" categories></ul>
 					</li>
 					<li ng-if="started" class="alert-success"><a class="alert-link" href="#/build">Build</a></li>

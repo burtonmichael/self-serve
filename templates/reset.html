@@ -1,1 +1,11 @@
-Hello
+<section class="leading">
+	<h2>Reset</h2>
+	<p>
+		Reset the session to delete all stored data.
+	</p>
+	<a ng-class="{'disabled': confirm}" class="btn btn-danger" ng-click="confirm=true">Delete</a>
+	<div class="alert alert-warning" ng-show="confirm">
+		<p>Warning</p>
+		<a class="btn btn-warning" ng-click="reset()">Confirm</a>
+	</div>
+</section>
