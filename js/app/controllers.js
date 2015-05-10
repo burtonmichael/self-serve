@@ -15,14 +15,32 @@ angular.module('selfServe.controllers', ['ngAnimate'])
     $scope.base = preloadData.base;
 }])
 
-.controller('buildCtrl', ['$scope', 'PropertiesService', function($scope, PropertiesService){
+.controller('customiseCtrl', ['$scope', '$routeParams', 'preloadData', function($scope, $routeParams, preloadData){
+    $scope.categories = preloadData.categories;
+}])
 
+.controller('buildCtrl', ['$scope', 'PropertiesService', function($scope, PropertiesService){
+	$scope.properties = PropertiesService.getProperties();
+	$scope.url;
+
+	$scope.generate = function() {
+		var url = 'http://www.rentalcars.com/affxml/Home.do?'
+		var parameters = '';
+		angular.forEach($scope.properties, function(property) {
+			parameters += "&" + property.key + "=" + property.value;
+		})
+		$scope.url = url + parameters.substr(1);
+	}
+
+	$scope.resetProperty = function(key) {
+		PropertiesService.resetProperty(key);
+		$scope.properties = PropertiesService.getProperties();
+		$scope.url = null;
+	}
 }])
 
 .controller('resetCtrl', ['$scope', '$rootScope', 'PropertiesService', function($scope, $rootScope, PropertiesService){
-	$scope.confirm = false;
-
-	$scope.reset = function(key) {
+	$scope.resetProperties = function(key) {
 		PropertiesService.resetProperties();
 		$rootScope.affiliateCode = undefined;
 	}

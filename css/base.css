@@ -46,7 +46,7 @@ section {
 }
 
 .leading {
-	background-color: #EBEBEB;
+	background-color: #f2f2f2;
 }
 
 .categories > li > a {
@@ -116,4 +116,17 @@ section {
 
 .properties-length-4 {
 	height: 192px;
+}
+
+.build-item {
+	margin: 6px 0;
+}
+
+.build-item button {
+	margin-left: 6px;
+	visibility: hidden;
+}
+
+.build-item:hover button {
+	visibility: visible;
 }

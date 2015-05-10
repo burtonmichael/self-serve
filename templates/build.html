@@ -1,1 +1,12 @@
-Build
+<ul>
+	<li class="build-item" ng-repeat="property in properties | orderBy: 'key'">
+		{{property.key}} - {{property.value}}
+		<button ng-if="property.key !=='affiliateCode'" type="button" ng-click="resetProperty(property.key, $index)" class="btn btn-danger btn-xs">
+			<small class="glyphicon glyphicon-remove"></small>
+		</button>
+	</li>
+</ul>
+
+<button class="btn btn-success" ng-click="generate()">Generate</button>
+<hr>
+<div class="well" ng-show="url">&lt;iframe src="{{url}}" width="100%" height="1100">&lt;/iframe></div>

@@ -21,7 +21,13 @@ var selfServe = angular.module('selfServe', [
 			}
 		}).
 		when('/customise', {
-			templateUrl: 'templates/customise.html'
+			templateUrl: 'templates/customise.html',
+			controller: 'customiseCtrl',
+			resolve: {
+				preloadData: function(DataService) {
+					return DataService.get();
+				}
+			}
 		}).
 		when('/build', {
 			templateUrl: 'templates/build.html',
