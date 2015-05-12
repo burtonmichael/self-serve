@@ -19,31 +19,62 @@ angular.module('selfServe.controllers', ['ngAnimate'])
     $scope.categories = preloadData.categories;
 }])
 
-.controller('buildCtrl', ['$scope', 'PropertiesService', function($scope, PropertiesService){
+.controller('buildCtrl', ['$scope', '$modal', 'PropertiesService', function($scope, $modal, PropertiesService){
 	$scope.properties = PropertiesService.getProperties();
-	$scope.url;
 
 	$scope.generate = function() {
-		var url = 'http://www.rentalcars.com/affxml/Home.do?'
-		var parameters = '';
-		angular.forEach($scope.properties, function(property) {
-			parameters += "&" + property.key + "=" + property.value;
-		})
-		$scope.url = url + parameters.substr(1);
-	}
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: 'templates/modals/modalBuild.html',
+			controller: function($scope, $modalInstance, url) {
+				$scope.url = url;
+
+				$scope.preview = function () {
+					window.open(url);
+				};
+
+				$scope.close = function () {
+					$modalInstance.dismiss('close');
+				};
+			},
+			resolve: {
+				url: function () {
+					var url = 'http://www.rentalcars.com/affxml/Home.do?'
+					var parameters = '';
+					angular.forEach($scope.properties, function(property) {
+						parameters += "&" + property.key + "=" + property.value;
+					})
+					return url + parameters.substr(1);
+				}
+			}
+		});
+	};
 
 	$scope.resetProperty = function(key) {
 		PropertiesService.resetProperty(key);
 		$scope.properties = PropertiesService.getProperties();
 		$scope.url = null;
-	}
+	};
 }])
 
-.controller('resetCtrl', ['$scope', '$rootScope', 'PropertiesService', function($scope, $rootScope, PropertiesService){
-	$scope.resetProperties = function(key) {
-		PropertiesService.resetProperties();
-		$rootScope.affiliateCode = undefined;
-	}
+.controller('resetCtrl', ['$scope', '$modal', function($scope, $modal){
+	$scope.resetProperties = function() {
+		var modalInstance = $modal.open({
+			animation: true,
+			size: 'sm',
+			templateUrl: 'templates/modals/modalReset.html',
+			controller: function($scope, $modalInstance, $rootScope, PropertiesService) {
+				$scope.confirm = function () {
+					PropertiesService.resetProperties();
+					$rootScope.affiliateCode = undefined;
+					$modalInstance.dismiss();
+				};
+				$scope.close = function () {
+					$modalInstance.dismiss();
+				};
+			}
+		});
+	};
 }])
 
 .controller('navigationCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
@@ -61,37 +92,41 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 
 	$scope.attempted = false;
 	$scope.success = false;
-	$scope.error = "";
 
 	if ($scope.property.input.type === "select" && $scope.property.value)
 		$scope.preset = $filter('filter')($scope.property.input.options, {value: $scope.property.value});
 
+	$scope.closeAlert = function(index) {
+		delete $scope.error;
+	}
+
 	$scope.setProperty = function(key, value, restrict) {
 		var value = value ? value.split(" ").join("") : "";
 		var valid = false;
-		var error;
+		var errorMsg = 'Please check and try again.';
 
 		if (value == "") {
-        	error = "Enter a value."
+        	errorMsg = "Enter a value."
         } else {
 			switch(restrict) {
 	            case 'color':
-	                if (value.length > 7 || /([0-9A-F]{6})|([0-9A-F]{3})/i.test(value)) {
+	                if ((value.length === 4 || value.length === 7) && /#([0-9A-F]{6}$)|([0-9A-F]{3}$)/i.test(value)) {
 	                    valid = true;
 	                } else {
-	                	error = "This value needs to be a hexidecimal color."
+	                	errorMsg = "This value needs to be a hexidecimal color."
 	                }
 	                break;
 	            case 'number':
+	            	value = parseInt(value);
 	                if (/([0-9])/i.test(value)) {
 	                    valid = true;
 	                } else {
-	                	error = "This value needs to be a number."
+	                	errorMsg = "This value needs to be a number."
 	                }
 	                break;
 				default:
 					if (value == "") {
-	                	error = "Enter a value."
+	                	errorMsg = "Enter a value."
 					} else {
 						valid = true;
 					}
@@ -106,7 +141,10 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 			if (key == "affiliateCode") 
 				$rootScope.affiliateCode = value;
 		} else {
-			$scope.error = error;
+			$scope.error = {
+				type: 'danger',
+				msg: errorMsg
+			};
 			$scope.success = false;
 		}
 		$scope.attempted = true;

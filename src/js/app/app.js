@@ -1,5 +1,6 @@
 var selfServe = angular.module('selfServe', [
 	'ngRoute',
+	'ui.bootstrap',
 	'colorpicker.module',
 	'LocalStorageModule',
 	'selfServe.services',
