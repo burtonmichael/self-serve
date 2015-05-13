@@ -91,13 +91,20 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	$scope.property.value = PropertiesService.getProperty($scope.property.parameter) || '';
 
 	$scope.attempted = false;
-	$scope.success = false;
+	$scope.success;
+
+	if ($scope.property.input.restrict === "color") {
+		$scope.$watch('property.value', function(newValue, oldValue) {
+			if(newValue && newValue.indexOf('#') !== 0)
+				$scope.property.value = '#' + $scope.property.value
+		});
+	}
 
 	if ($scope.property.input.type === "select" && $scope.property.value)
 		$scope.preset = $filter('filter')($scope.property.input.options, {value: $scope.property.value});
 
 	$scope.closeAlert = function(index) {
-		delete $scope.error;
+		$scope.error = null;
 	}
 
 	$scope.setProperty = function(key, value, restrict) {
