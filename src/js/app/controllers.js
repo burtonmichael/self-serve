@@ -39,10 +39,15 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 			},
 			resolve: {
 				url: function () {
-					var url = 'http://www.rentalcars.com/affxml/Home.do?'
+					var url = 'http://www.rentalcars.com/affxml/Home.do?';
 					var parameters = '';
 					angular.forEach($scope.properties, function(property) {
-						parameters += "&" + property.key + "=" + property.value;
+						parameters += "&" + property.key + "=";
+						if (property.value.indexOf('#') === 0) {
+							parameters += property.value.substr(1);
+						} else {
+							parameters += property.value;
+						}
 					})
 					return url + parameters.substr(1);
 				}
@@ -145,8 +150,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 			PropertiesService.setProperty(key, value);
 			$scope.property.value = value;
 			$scope.success = true;
-			if (key == "affiliateCode") 
-				$rootScope.affiliateCode = value;
+			if (key == "affiliateCode") $rootScope.affiliateCode = value;
 		} else {
 			$scope.error = {
 				type: 'danger',
