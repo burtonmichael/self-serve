@@ -1,6 +1,6 @@
 <section>
 	<h3>{{property.title}}</h3>
-	<p>{{property.description}}</p>
+	<p ng-bind-html="property.description | unsafe"></p>
 	<div ng-controller="inputCtrl" ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
 	<hr>
 	<div class="snippet">
@@ -10,13 +10,6 @@
 	</div>
 	<div ng-if="property.images.length >= 1">
 		<hr>
-		<div class="images">
-			<div class="image" ng-repeat="image in property.images">
-				<img class="img-responsive" ng-src="{{image.src}}" alt="{{image.caption}}">
-				<p class="caption">
-					{{image.caption}}
-				</p>
-			</div>
-		</div>
+		<div images="property.images"></div>
 	</div>
 </section>

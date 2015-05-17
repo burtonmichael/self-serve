@@ -7,6 +7,6 @@
 
 <section ng-repeat="property in category.properties">
 	<h3>{{property.title}}</h3>
-	<p>{{property.description}}</p>
+	<p ng-bind-html="property.description | unsafe"></p>
 	<div ng-controller="inputCtrl" ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
 </section>

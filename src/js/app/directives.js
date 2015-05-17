@@ -1,6 +1,5 @@
 angular.module('selfServe.directives', [])
 
-
 .directive('categories', ['DataService', '$routeParams', function(DataService, $routeParams){
 	return {
 		scope: {},
@@ -30,3 +29,14 @@ angular.module('selfServe.directives', [])
 		replace: false
 	};
 }])
+
+.directive('images', function(){
+	return {
+		scope: {
+			images: "="
+		},
+		controller: "imagesCtrl",
+		restrict: 'A',
+		templateUrl: 'templates/images.html'
+	};
+})

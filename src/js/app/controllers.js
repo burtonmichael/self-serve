@@ -1,22 +1,18 @@
 angular.module('selfServe.controllers', ['ngAnimate'])
 
-.controller('categoryCtrl', ['$scope', '$routeParams', 'preloadData', function($scope, $routeParams, preloadData){
+.controller('mainCtrl', ['$scope', '$routeParams', 'DataService', function($scope, $routeParams, DataService){
+    DataService.get().then(function(data){
+    	$scope.base = data.base
+    	$scope.categories = data.categories
+    });
+}])
+
+.controller('preloadCtrl', ['$scope', '$routeParams', 'preloadData', function($scope, $routeParams, preloadData){
     $scope.categories = preloadData.categories;
     $scope.category = $scope.categories[$routeParams.category];
-}])
-
-.controller('propertyCtrl', ['$scope', '$routeParams', 'preloadData', function($scope, $routeParams, preloadData){
-    $scope.categories = preloadData.categories;
-    $scope.category = $scope.categories[$routeParams.category];
-    $scope.property = $scope.category.properties[$routeParams.property];
-}])
-
-.controller('startCtrl', ['$scope', '$routeParams', 'preloadData', function($scope, $routeParams, preloadData){
-    $scope.base = preloadData.base;
-}])
-
-.controller('customiseCtrl', ['$scope', '$routeParams', 'preloadData', function($scope, $routeParams, preloadData){
-    $scope.categories = preloadData.categories;
+    if ($routeParams.property) {
+    	$scope.property = $scope.category.properties[$routeParams.property];
+    }
 }])
 
 .controller('buildCtrl', ['$scope', '$modal', 'PropertiesService', function($scope, $modal, PropertiesService){
@@ -92,7 +88,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	}, true);
 }])
 
-.controller('inputCtrl', ['$scope', '$rootScope', '$filter', 'PropertiesService', function($scope, $rootScope, $filter, PropertiesService){
+.controller('inputCtrl', ['$scope', '$rootScope', '$filter', '$sce', 'PropertiesService', function($scope, $rootScope, $filter, $sce, PropertiesService){
 	$scope.property.value = PropertiesService.getProperty($scope.property.parameter) || '';
 
 	$scope.attempted = false;
@@ -170,4 +166,20 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 		if (key == "affiliateCode") 
 			$rootScope.affiliateCode = undefined;
 	}
+}])
+
+.controller('imagesCtrl', ['$scope', '$modal', function($scope, $modal){
+	$scope.lightbox = function(src, caption) {
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: 'templates/modals/modalLightbox.html',
+			controller: function($scope, $modalInstance) {
+				$scope.src = src;
+				$scope.caption = caption;
+				$scope.close = function () {
+					$modalInstance.dismiss();
+				};
+			}
+		});
+	};
 }])

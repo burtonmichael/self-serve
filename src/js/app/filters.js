@@ -31,3 +31,7 @@ angular.module('selfServe.filters', [])
 		return filtered;
 	};
 })
+
+.filter('unsafe', function($sce) {
+	return $sce.trustAsHtml;
+});

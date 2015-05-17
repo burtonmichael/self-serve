@@ -14,21 +14,11 @@ var selfServe = angular.module('selfServe', [
 		$routeProvider.
 		when('/start', {
 			templateUrl: 'templates/start.html',
-			controller: 'startCtrl',
-			resolve: {
-				preloadData: function(DataService) {
-					return DataService.get();
-				}
-			}
+			controller: 'mainCtrl'
 		}).
 		when('/customise', {
 			templateUrl: 'templates/customise.html',
-			controller: 'customiseCtrl',
-			resolve: {
-				preloadData: function(DataService) {
-					return DataService.get();
-				}
-			}
+			controller: 'mainCtrl'
 		}).
 		when('/build', {
 			templateUrl: 'templates/build.html',
@@ -40,7 +30,7 @@ var selfServe = angular.module('selfServe', [
 		}).
 		when('/:category', {
 			templateUrl: 'templates/category.html',
-			controller: 'categoryCtrl',
+			controller: 'preloadCtrl',
 			resolve: {
 				preloadData: function(DataService) {
 					return DataService.get();
@@ -49,7 +39,7 @@ var selfServe = angular.module('selfServe', [
 		}).
 		when('/:category/:property', {
 			templateUrl: 'templates/property.html',
-			controller: 'propertyCtrl',
+			controller: 'preloadCtrl',
 			resolve: {
 				preloadData: function(DataService) {
 					return DataService.get();
