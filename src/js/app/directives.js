@@ -25,7 +25,7 @@ angular.module('selfServe.directives', [])
 			});
 		},
 		restrict: 'A',
-		templateUrl: 'templates/categories.html',
+		templateUrl: 'templates/nav-categories.html',
 		replace: false
 	};
 }])
@@ -38,5 +38,17 @@ angular.module('selfServe.directives', [])
 		controller: "imagesCtrl",
 		restrict: 'A',
 		templateUrl: 'templates/images.html'
+	};
+})
+
+.directive('snippet', function(){
+	return {
+		scope: {
+			key: "=",
+			value: "="
+		},
+		restrict: 'A',
+		template: '<kbd>&<span class="snippet-key">{{key}}</span>=<span class="snippet-value">{{value}}</span></kbd>',
+		replace: true
 	};
 })

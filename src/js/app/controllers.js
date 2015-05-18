@@ -21,7 +21,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	$scope.generate = function() {
 		var modalInstance = $modal.open({
 			animation: true,
-			templateUrl: 'templates/modals/modalBuild.html',
+			templateUrl: 'templates/modals/modal-build.html',
 			controller: function($scope, $modalInstance, url) {
 				$scope.url = url;
 
@@ -63,7 +63,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 		var modalInstance = $modal.open({
 			animation: true,
 			size: 'sm',
-			templateUrl: 'templates/modals/modalReset.html',
+			templateUrl: 'templates/modals/modal-reset.html',
 			controller: function($scope, $modalInstance, $rootScope, PropertiesService) {
 				$scope.confirm = function () {
 					PropertiesService.resetProperties();
@@ -103,6 +103,10 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 
 	if ($scope.property.input.type === "select" && $scope.property.value)
 		$scope.preset = $filter('filter')($scope.property.input.options, {value: $scope.property.value});
+
+	if ($scope.property.input.type === "checkbox") {
+		$scope.all = $scope.property.value === "all" ? true : false;
+	}
 
 	$scope.closeAlert = function(index) {
 		$scope.error = null;
@@ -172,7 +176,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	$scope.lightbox = function(src, caption) {
 		var modalInstance = $modal.open({
 			animation: true,
-			templateUrl: 'templates/modals/modalLightbox.html',
+			templateUrl: 'templates/modals/modal-lightbox.html',
 			controller: function($scope, $modalInstance) {
 				$scope.src = src;
 				$scope.caption = caption;
