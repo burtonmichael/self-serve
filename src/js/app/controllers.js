@@ -88,7 +88,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	}, true);
 }])
 
-.controller('inputCtrl', ['$scope', '$rootScope', '$filter', '$sce', 'PropertiesService', function($scope, $rootScope, $filter, $sce, PropertiesService){
+.controller('inputCtrl', ['$scope', '$filter', '$sce', 'PropertiesService', function($scope, $filter, $sce, PropertiesService){
 	$scope.property.value = PropertiesService.getProperty($scope.property.parameter) || '';
 
 	$scope.attempted = false;
@@ -108,16 +108,22 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 		$scope.all = $scope.property.value === "all" ? true : false;
 	}
 
+	$scope.$on('setResponse', function(event, data){
+		console.log(data);
+	})
+
 	$scope.closeAlert = function(index) {
 		$scope.error = null;
 	}
+}])
 
+.controller('saveCtrl', ['$scope', '$rootScope', 'PropertiesService', function($scope, $rootScope, PropertiesService){
 	$scope.setProperty = function(key, value, restrict) {
-		var value = value ? value.split(" ").join("") : "";
+		var value = value;
 		var valid = false;
 		var errorMsg = 'Please check and try again.';
 
-		if (value == "") {
+		if (!value) {
         	errorMsg = "Enter a value."
         } else {
 			switch(restrict) {
@@ -148,17 +154,21 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 
 		if (valid) {
 			PropertiesService.setProperty(key, value);
-			$scope.property.value = value;
-			$scope.success = true;
+			$scope.$emit('setResponse', {
+				status: 'success',
+				data: value
+			});
 			if (key == "affiliateCode") $rootScope.affiliateCode = value;
 		} else {
 			$scope.error = {
-				type: 'danger',
-				msg: errorMsg
-			};
-			$scope.success = false;
+				type: "danger",
+				message: "asd"
+			}
+			$scope.$emit('setResponse', {
+				status: 'fail',
+				data: errorMsg
+			});
 		}
-		$scope.attempted = true;
 	}
 
 	$scope.resetProperty = function(key) {

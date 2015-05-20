@@ -1,10 +1,7 @@
 <div class="input-group">
 	<span class="input-group-addon" ng-style="{'background-color': property.value}">&nbsp;&nbsp;</span>
 	<input colorpicker type="text" class="form-control" ng-model="property.value" placeholder="{{property.input.placeholder}}">
-	<span class="input-group-btn">
-		<button ng-click="setProperty(property.parameter, property.value, property.input.restrict)" class="btn btn-default" ng-class="{ 'btn-success': success, 'btn-danger': attempted && !success }" type="button">Save</button>
-		<button ng-click="resetProperty(property.parameter)" class="btn btn-default" type="button">Reset</button>
-	</span>
+	<span inline-buttons class="input-group-btn"></span>
 </div>
 <alert ng-show="error" type="{{error.type}}" close="closeAlert($index)">
 	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

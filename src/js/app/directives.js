@@ -52,3 +52,10 @@ angular.module('selfServe.directives', [])
 		replace: true
 	};
 })
+
+.directive('inlineButtons', function(){
+	return {
+		controller: "saveCtrl",
+		templateUrl: 'templates/inputs/inline-buttons.html'
+	}
+})
