@@ -1,11 +1,13 @@
 <div class="input-group">
 	<input type="text" class="form-control" ng-model="property.value" placeholder="{{property.input.placeholder}}">
-	<span class="input-group-btn">
-		<button ng-click="setProperty(property.parameter, property.value, property.input.restrict)" class="btn btn-default" ng-class="{ 'btn-success': success, 'btn-danger': attempted && !success }" type="button">Save</button>
-		<button ng-click="resetProperty(property.parameter)" class="btn btn-default" type="button">Reset</button>
-	</span>
+	<span buttons class="input-group-btn"></span>
 </div>
-<alert ng-show="error" type="{{error.type}}" close="closeAlert($index)">
+
+<div class="alert alert-dismissable alert-danger" role="alert" ng-show="error">
+    <button type="button" class="close" ng-click="error = null">
+        <span aria-hidden="true">×</span>
+        <span class="sr-only">Close</span>
+    </button>
 	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-	<strong>{{error.msg}}</strong>
-</alert>
+	<strong>Error: </strong>{{error.message}}
+</div>

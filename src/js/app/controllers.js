@@ -117,21 +117,22 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	}
 }])
 
-.controller('saveCtrl', ['$scope', '$rootScope', 'PropertiesService', function($scope, $rootScope, PropertiesService){
+.controller('buttonCtrl', ['$scope', '$rootScope', 'PropertiesService', function($scope, $rootScope, PropertiesService){
 	$scope.setProperty = function(key, value, restrict) {
+		$scope.attempted = true;
 		var value = value;
 		var valid = false;
-		var errorMsg = 'Please check and try again.';
+		var message = 'Please check and try again.';
 
 		if (!value) {
-        	errorMsg = "Enter a value."
+        	message = "Enter a value."
         } else {
 			switch(restrict) {
 	            case 'color':
 	                if ((value.length === 4 || value.length === 7) && /#([0-9A-F]{6}$)|([0-9A-F]{3}$)/i.test(value)) {
 	                    valid = true;
 	                } else {
-	                	errorMsg = "This value needs to be a hexidecimal color."
+	                	message = "This value needs to be a hexidecimal color."
 	                }
 	                break;
 	            case 'number':
@@ -139,12 +140,12 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	                if (/([0-9])/i.test(value)) {
 	                    valid = true;
 	                } else {
-	                	errorMsg = "This value needs to be a number."
+	                	message = "This value needs to be a number."
 	                }
 	                break;
 				default:
 					if (value == "") {
-	                	errorMsg = "Enter a value."
+	                	message = "Enter a value."
 					} else {
 						valid = true;
 					}
@@ -154,20 +155,12 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 
 		if (valid) {
 			PropertiesService.setProperty(key, value);
-			$scope.$emit('setResponse', {
-				status: 'success',
-				data: value
-			});
+			$scope.success = true;
 			if (key == "affiliateCode") $rootScope.affiliateCode = value;
 		} else {
 			$scope.error = {
-				type: "danger",
-				message: "asd"
+				message: message
 			}
-			$scope.$emit('setResponse', {
-				status: 'fail',
-				data: errorMsg
-			});
 		}
 	}
 
