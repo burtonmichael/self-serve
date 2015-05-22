@@ -7,7 +7,11 @@ var buildSrc = './build';
 
 function prepareTemplates() {
 	return gulp.src('./src/templates/**/*.html')
-		.pipe(plugins.angularTemplatecache());
+		.pipe(plugins.angularTemplatecache('templates.js', {
+            module: 'selfServe.templates',
+            root: 'templates/',
+            standAlone: false
+        }));
 }
 
 // Build tasks
@@ -67,14 +71,24 @@ gulp.task('images', ['clean:images'], function() {
 // Inject task
 
 gulp.task('inject', ['build'], function() {
-    var sources = gulp.src([buildSrc + '/**/*.js', buildSrc + '/**/*.css'], {
+    var libSrc = gulp.src([buildSrc + '/library/**/*.js', buildSrc + '/library/**/*.css'], {
+    	read: false
+    });
+
+    var appSrc = gulp.src([buildSrc + '/js/**/*.js', buildSrc + '/css/**/*.css'], {
     	read: false
     });
 
     return gulp.src('./src/index.html')
-    	.pipe(plugins.inject(sources, {
+    	.pipe(plugins.inject(libSrc, {
     		ignorePath: 'build/',
-    		addRootSlash: false
+    		addRootSlash: false,
+    		name: 'library'
+    	}))
+    	.pipe(plugins.inject(appSrc, {
+    		ignorePath: 'build/',
+    		addRootSlash: false,
+    		name: 'app'
     	}))
     	.pipe(gulp.dest(buildSrc));
 });
