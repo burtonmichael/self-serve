@@ -3,6 +3,7 @@ var selfServe = angular.module('selfServe', [
 	'ui.bootstrap',
 	'colorpicker.module',
 	'LocalStorageModule',
+	'selfServe.templates',
 	'selfServe.services',
 	'selfServe.controllers',
 	'selfServe.directives',

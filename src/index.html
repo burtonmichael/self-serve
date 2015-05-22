@@ -5,19 +5,13 @@
 	<title>Self Serve</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="library/angular-bootstrap-colorpicker/css/colorpicker.min.css">
-	<link rel="stylesheet" href="css/base.css">
+	<!-- inject:css -->
+		<link rel="stylesheet" href="library/angular-bootstrap-colorpicker/css/colorpicker.min.css">
+		<link rel="stylesheet" href="css/base.css">
+	<!-- endinject -->
 </head>
 <body ng-app="selfServe">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<img src="img/ice-cream.jpg" alt="">
-				<h1><strong>Soft Serve</strong></h1>
-				<kbd>Self serve software</kbd>
-				<hr>
-			</div>
-		</div>
 		<div class="row">
 			<div class="col-md-4">
 				<ul class="navigation" ng-controller="navigationCtrl">
@@ -35,17 +29,19 @@
 		</div>
 	</div>
 
-	<script src="library/angular/angular.js"></script>
-	<script src="library/angular-route/angular-route.js"></script>
-	<script src="library/angular-animate/angular-animate.js"></script>
-	<script src="library/angular-local-storage/dist/angular-local-storage.js"></script>
-	<script src="library/angular-bootstrap/ui-bootstrap.min.js"></script>
-	<script src="library/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-	<script src="library/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
-	<script src="js/app/services.js"></script>
-	<script src="js/app/directives.js"></script>
-	<script src="js/app/controllers.js"></script>
-	<script src="js/app/filters.js"></script>
-	<script src="js/app/app.js"></script>
+	<!-- inject:js -->
+		<script src="library/angular/angular.js"></script>
+		<script src="library/angular-route/angular-route.js"></script>
+		<script src="library/angular-animate/angular-animate.js"></script>
+		<script src="library/angular-local-storage/dist/angular-local-storage.js"></script>
+		<script src="library/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+		<script src="js/app/services.js"></script>
+		<script src="js/app/directives.js"></script>
+		<script src="js/app/controllers.js"></script>
+		<script src="js/app/filters.js"></script>
+		<script src="js/app/templates.js"></script>
+		<script src="js/app/ui-bootstrap.js"></script>
+		<script src="js/app/app.js"></script>
+	<!-- endinject -->
 </body>
 </html>
