@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Self Serve</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
 	<!-- library:css -->
 		<link rel="stylesheet" href="library/angular-bootstrap-colorpicker/css/colorpicker.min.css">
 	<!-- endinject -->
@@ -13,19 +13,23 @@
 	<!-- endinject -->
 </head>
 <body ng-app="selfServe">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
+	<div class="side-nav">
+		<div class="side-nav-inner">
+			<nav>
 				<ul class="navigation" ng-controller="navigationCtrl">
-					<li class="alert-info"><a class="alert-link" href="#/start">Start</a></li>
-					<li ng-if="started" class="alert-warning"><a href="#/customise" class="alert-link">Customise</a>
+					<li><a class="alert-link" href="#/start">Start</a></li>
+					<li ng-if="started"><a href="#/customise">Customise</a>
 						<ul class="categories" categories></ul>
 					</li>
-					<li ng-if="started" class="alert-success"><a class="alert-link" href="#/build">Build</a></li>
-					<li class="alert-danger"><a class="alert-link" href="#/reset">Reset</a></li>
+					<li ng-if="started"><a href="#/build">Build</a></li>
+					<li><a href="#/reset">Reset</a></li>
 				</ul>
-			</div>
-			<div class="col-md-8">
+			</nav>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
 				<ng-view></ng-view>
 			</div>
 		</div>

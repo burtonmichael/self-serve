@@ -1,5 +1,11 @@
 body {
-	font-family: 'RobotoDraft', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	background-color: #FBFBFB;
+	font-weight: 300;
+}
+
+h1, h2, h3, h4 {
+	font-weight: 300;
 }
 
 .navigation, .navigation ul {
@@ -11,10 +17,6 @@ body {
 	list-style: none;
 }
 
-.navigation > li {
-	margin-bottom: 24px;
-}
-
 .navigation li a {
 	text-decoration: none;
 	font-size: 13px;
@@ -24,53 +26,28 @@ body {
 }
 
 .navigation > li > a {
-	font-weight: 700;
-}
-
-.categories li {
-	background-color: #F7F7F9;
-}
-
-.categories > .active {
-	background-color: #E3E3E3;
-}
-
-.properties .active {
-	background-color: #EBEBEB;
+	font-weight: 400;
 }
 
 section {
 	padding: 12px 24px 24px;
-	background-color: #F7F7F9;
+	background-color: #FFF;
 	margin-bottom: 24px;
-}
-
-.leading {
-	background-color: #f2f2f2;
+	border-radius: 2px;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
 .categories > li > a {
-	font-weight: bold;
 	margin-left: 24px;
-}
-
-.properties li {
-	background-color: #f2f2f2;
 }
 
 .properties a {
 	margin-left: 42px;
 }
 
-.build li, {
+.build li {
 	margin-top: 12px;
 }
-
-.build a {
-
-}
-
-
 
 .snippet kbd {
 	background-color: #272F32;
@@ -129,4 +106,47 @@ section {
 
 .build-item:hover button {
 	visibility: visible;
+}
+
+.side-nav {
+    z-index: 3;
+    height: 100%;
+    font-size: 13px;
+    padding: 12px 0 10px 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    background: #FFF;
+    border-right: 1px solid #E0E0E0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition-delay: .1s;
+    -moz-transition-delay: .1s;
+    transition-delay: .1s;
+    -webkit-transition-duration: .2s;
+    -moz-transition-duration: .2s;
+    transition-duration: .2s;
+    -webkit-transition-property: (),-webkit-transform;
+    -moz-transition-property: (),-moz-transform;
+    transition-property: (),transform;
+    -webkit-transition-timing-function: cubic-bezier(.4,0,.2,1);
+    -moz-transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+.side-nav-inner {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 160px;
 }
