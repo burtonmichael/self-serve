@@ -10,3 +10,7 @@
 	<p>{{property.description}}</p>
 	<div ng-controller="inputCtrl" ng-include="'templates/property/inputs/' + property.input.type + '.html'" property="property"></div>
 </section>
+
+<section ng-show="base.affiliateCode.value" class="card">
+	Great!
+</section>

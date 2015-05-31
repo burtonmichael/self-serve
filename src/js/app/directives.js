@@ -12,7 +12,6 @@ angular.module('selfServe.directives', [])
 		scope: {
 			images: "="
 		},
-		controller: "imagesCtrl",
 		restrict: 'A',
 		templateUrl: 'templates/property/images.html'
 	};
@@ -36,3 +35,27 @@ angular.module('selfServe.directives', [])
 		templateUrl: 'templates/property/buttons.html'
 	}
 })
+
+.directive('lightbox', ['$modal', function($modal){
+	return {
+		scope: {
+			src: "=",
+			caption: "="
+		},
+		link: function(scope, element, attributes, controller) {
+			element.bind('click', function(event) {
+				var modalInstance = $modal.open({
+					animation: true,
+					templateUrl: 'templates/modals/modal-lightbox.html',
+					controller: function($scope, $modalInstance) {
+						$scope.src = scope.src;
+						$scope.caption = scope.caption;
+						$scope.close = function () {
+							$modalInstance.dismiss();
+						};
+					}
+				});
+			});
+		}
+	};
+}]);

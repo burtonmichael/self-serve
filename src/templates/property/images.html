@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="images">
 		<div class="col-md-4" ng-repeat="image in images">
-			<a href="" ng-click="lightbox(image.src, image.caption)" class="lightbox card">
+			<a href="" lightbox src="image.src" caption="image.caption" class="lightbox card">
 				<img class="img-responsive" ng-src="{{image.src}}" alt="{{image.caption}}">
 				<div class="caption">
 					{{image.caption}}

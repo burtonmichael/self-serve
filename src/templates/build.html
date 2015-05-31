@@ -1,6 +1,6 @@
 <ul>
 	<li class="build-item" ng-repeat="property in properties | orderBy: 'key'">
-		{{property.key}} - {{property.value}} <span class="build-color glyphicon glyphicon-stop" ng-style="{color: property.value}" ng-if="property.value.indexOf('#') === 0"></span>
+		{{property.key}} - {{property.value | preview}} <span class="build-color glyphicon glyphicon-stop" ng-style="{color: property.value}" ng-if="property.value.indexOf('#') === 0"></span>
 		<button ng-if="property.key !=='affiliateCode'" type="button" ng-click="resetProperty(property.key, $index)" class="btn btn-danger btn-xs">
 			<small class="glyphicon glyphicon-remove"></small>
 		</button>

@@ -152,7 +152,7 @@ body {
     color: #fff;
 }
 
-.lightbox {
+.lightbox.card {
     display: block;
     color: #333;
     -webkit-transition: box-shadow 125ms;
@@ -162,8 +162,13 @@ body {
     transition: box-shadow 125ms;
 }
 
-.lightbox:hover,
-.lightbox:focus {
+.lightbox:hover {
+    text-decoration: none;
+    
+}
+
+.lightbox.card:hover,
+.lightbox.card:focus {
     outline: 0;
     box-shadow: 0 4px 12px 1px rgba(0, 0, 0, 0.26);
 }
@@ -179,4 +184,8 @@ body {
 
 .property-title:hover {
     color: #2980B9;
+}
+
+.modal-body img {
+    margin: 0 auto;
 }

@@ -21,22 +21,24 @@
                 <li ng-class="{'active': active.page == 'start'}">
                     <a href="#/start">Start</a>
                 </li>
-                <li ng-class="{'active': active.page == 'customise'}" ng-if="started">
-                    <a href="#/customise">Customise</a>
-                    <ul ng-show="active.page === 'customise'" class="nav-categories" active="active">
-                        <li class="nav-category" ng-class="{'active': active.category == category.parameter}" ng-repeat="category in categories">
-                            <a href="#/customise/{{category.parameter}}">{{category.parameter | title}}</a>
-                            <ul class="animate-show nav-properties" ng-show="active.category == category.parameter">
-                                <li class="nav-property" ng-class="{'active': active.property == property.parameter}" ng-repeat="property in category.properties">
-                                    <a href="#/customise/{{category.parameter}}/{{property.parameter}}">{{property.title}}</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li ng-class="{'active': active.page == 'build'}" ng-if="started">
-                    <a href="#/build">Build</a>
-                </li>
+                <div ng-if="hasAffiliateCode">
+                    <li ng-class="{'active': active.page == 'customise'}">
+                        <a href="#/customise">Customise</a>
+                        <ul ng-show="active.page === 'customise'" class="nav-categories" active="active">
+                            <li class="nav-category" ng-class="{'active': active.category == category.parameter}" ng-repeat="category in categories">
+                                <a href="#/customise/{{category.parameter}}">{{category.parameter | title}}</a>
+                                <ul class="animate-show nav-properties" ng-show="active.category == category.parameter">
+                                    <li class="nav-property" ng-class="{'active': active.property == property.parameter}" ng-repeat="property in category.properties">
+                                        <a href="#/customise/{{category.parameter}}/{{property.parameter}}">{{property.title}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li ng-class="{'active': active.page == 'build'}">
+                        <a href="#/build">Build</a>
+                    </li>
+                </div>
                 <li ng-class="{'active': active.page == 'reset'}">
                     <a href="#/reset">Reset</a>
                 </li>

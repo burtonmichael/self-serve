@@ -2,10 +2,9 @@
 <div class="input-group">
 	<div ng-repeat="option in property.input.options" class="checkbox">
 		<label>
-			<input ng-model="" ng-checked="all" ng-change="all = option.all" type="checkbox" value="">
-			<span ng-if="!option.all">{{option.label}}</span>
-			<strong ng-if="option.all">{{option.label}}</strong>
+			<input ng-model="option.selected" ng-change="getSelected()" type="checkbox" value="">
+			{{option.label}} <a href="" lightbox src="'img/modules/' + option.value + '.png'" caption="option.label" class="lightbox glyphicon glyphicon-info-sign"><span class=""></span></a>
 		</label>
 	</div>
-	<span buttons class="input-group-btn"></span>
 </div>
+<span buttons></span>

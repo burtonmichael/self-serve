@@ -32,6 +32,16 @@ angular.module('selfServe.filters', [])
 	};
 })
 
+.filter('preview', function() {
+	return function(value) {
+		var value = value;
+		if (value instanceof Array) {
+			value = value.join(", ")
+		}
+		return value;
+	};
+})
+
 .filter('unsafe', function($sce) {
 	return $sce.trustAsHtml;
 });

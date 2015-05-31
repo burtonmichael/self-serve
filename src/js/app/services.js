@@ -23,41 +23,41 @@ angular.module('selfServe.services', [])
 
 	var factory = {};
 
-	var localStorageObject = localStorageService.get("serve") || {};
+	var ls = localStorageService.get("serve") || {};
 
-	localStorageService.set("serve", localStorageObject);
+	localStorageService.set("serve", ls);
 
 	factory.getProperty = function(key) {
-		return localStorageObject[key];
+		return ls[key];
 	}
 
 	factory.getProperties = function() {
 		var properties = [];
-		for (var key in localStorageObject) {
+		for (var key in ls) {
 			properties.push({
 				"key": key,
-				"value": localStorageObject[key]
+				"value": ls[key]
 			});
 		}
 		return properties;
 	}
 
 	factory.setProperty = function(key, value) {
-		localStorageObject[key] = value;
-		localStorageService.set("serve", localStorageObject);
-		$rootScope.$broadcast('property:updated', localStorageObject);
+		ls[key] = value;
+		localStorageService.set("serve", ls);
+		$rootScope.$broadcast('property:updated', ls);
 	}
 
 	factory.resetProperties = function() {
-		localStorageObject = {};
-		localStorageService.set("serve", localStorageObject);
-		$rootScope.$broadcast('property:updated', localStorageObject);
+		ls = {};
+		localStorageService.set("serve", ls);
+		$rootScope.$broadcast('property:updated', ls);
 	}
 
 	factory.resetProperty = function(key) {
-		delete localStorageObject[key];
-		localStorageService.set("serve", localStorageObject);
-		$rootScope.$broadcast('property:updated', localStorageObject);
+		delete ls[key];
+		localStorageService.set("serve", ls);
+		$rootScope.$broadcast('property:updated', ls);
 	}
 
 	return factory;

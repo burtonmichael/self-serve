@@ -39,11 +39,18 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 					var parameters = '';
 					angular.forEach($scope.properties, function(property) {
 						parameters += "&" + property.key + "=";
-						if (property.value.indexOf('#') === 0) {
-							parameters += property.value.substr(1);
-						} else {
-							parameters += property.value;
+
+						var value = property.value;
+
+						if (value instanceof Array) {
+							value = value.join("+")
 						}
+
+						if (value.indexOf('#') === 0) {
+							value += value.substr(1);
+						}
+
+						parameters += value;
 					})
 					return url + parameters.substr(1);
 				}
@@ -78,7 +85,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 }])
 
 .controller('navCtrl', ['$scope', '$rootScope', '$location', 'DataService', 'PropertiesService', function($scope, $rootScope, $location, DataService, PropertiesService){
-	$scope.started = PropertiesService.getProperty('affiliateCode');
+	$scope.hasAffiliateCode = PropertiesService.getProperty('affiliateCode');
 
 	DataService.get().then(function(data){
     	$scope.base = data.base
@@ -94,11 +101,11 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	});
 
 	$scope.$on('property:updated', function(event, data) {
-		$scope.started = data.affiliateCode
+		$scope.hasAffiliateCode = data.affiliateCode
 	});
 }])
 
-.controller('inputCtrl', ['$scope', '$filter', '$sce', 'PropertiesService', function($scope, $filter, $sce, PropertiesService){
+.controller('inputCtrl', ['$scope', '$filter', '$rootScope', 'PropertiesService', '$modal', function($scope, $filter, $rootScope, PropertiesService, $modal){
 	$scope.property.value = PropertiesService.getProperty($scope.property.parameter) || '';
 
 	$scope.attempted = false;
@@ -111,11 +118,34 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 		});
 	}
 
-	if ($scope.property.input.type === "select" && $scope.property.value)
-		$scope.preset = $filter('filter')($scope.property.input.options, {value: $scope.property.value});
+	$scope.setCheckboxes = function() {
+		angular.forEach($scope.property.input.options, function(option){
+			if ($scope.property.value.indexOf(option.value) >= 0) {
+				option.selected = true;
+			} else {
+				option.selected = false;
+			}
+		})
+	}
 
-	if ($scope.property.input.type === "checkbox") {
-		$scope.all = $scope.property.value === "all" ? true : false;
+	switch ($scope.property.input.type) {
+		case "select":
+			if ($scope.property.value) $scope.preset = $filter('filter')($scope.property.input.options, {value: $scope.property.value});
+			break;
+		case "checkbox":
+		case "radio":
+			$scope.setCheckboxes();
+			$scope.$on('property:updated', function(event, data) {
+				$scope.setCheckboxes();
+			});
+			break;
+	}
+
+	$scope.getSelected = function() {
+		$scope.property.value = [];
+		angular.forEach($filter('filter')($scope.property.input.options, {selected: true}), function(item) {
+			$scope.property.value.push(item.value);
+		});
 	}
 
 	$scope.closeAlert = function(index) {
@@ -158,6 +188,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 
 		if (valid) {
 			PropertiesService.setProperty(key, value);
+			$scope.error = null;
 			$scope.success = true;
 		} else {
 			$scope.error = {
@@ -167,26 +198,10 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	}
 
 	$scope.resetProperty = function(key) {
-		PropertiesService.resetProperty(key);
 		$scope.property.value = '';
 		$scope.attempted = false;
         $scope.success = false;
         $scope.preset = null;
+		PropertiesService.resetProperty(key);
 	}
-}])
-
-.controller('imagesCtrl', ['$scope', '$modal', function($scope, $modal){
-	$scope.lightbox = function(src, caption) {
-		var modalInstance = $modal.open({
-			animation: true,
-			templateUrl: 'templates/modals/modal-lightbox.html',
-			controller: function($scope, $modalInstance) {
-				$scope.src = src;
-				$scope.caption = caption;
-				$scope.close = function () {
-					$modalInstance.dismiss();
-				};
-			}
-		});
-	};
 }])
