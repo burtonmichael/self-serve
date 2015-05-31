@@ -1,6 +1,10 @@
 <section class="leading">
 	<h2>Customise</h2>
-	<p>Here you can find every customisable property available.</p>
+	<p class="lead">Here you can find every customisable property available.</p>
+</section>
+
+<section class="card">
+	<h3>Filter</h3>
 	<p>Use the text filter below to find a specific property or select sub category from the navigator.</p>
 	<div class="input-group">
 		<div class="input-group-addon">Filter</div>
@@ -8,18 +12,10 @@
 	</div>
 </section>
 
-<!-- <section>
-	<div ng-repeat="category in categories">
-		<div ng-repeat="property in filtered = (category.properties | array | filter:search)">
-			<h3>{{property.title}}</h3>
-			<p>{{property.description}}</p>
-			<div ng-controller="inputCtrl" ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
-		</div>
+<section class="card" ng-repeat="property in filtered = (categories | properties | filter:search | orderBy:'parameter')">
+	<h3 class="property-title" ng-click="show = !show">{{property.title}}<span ng-class="{'glyphicon-chevron-up': show, 'glyphicon-chevron-down': !show}" class="glyphicon pull-right"></span></h3>
+	<div ng-show="show">
+		<p ng-bind-html="property.description | unsafe"></p>
+		<div ng-controller="inputCtrl" ng-include="'templates/property/inputs/' + property.input.type + '.html'" property="property"></div>
 	</div>
-</section> -->
-
-<section ng-repeat="property in filtered = (categories | properties | filter:search | orderBy:'parameter')">
-	<h3>{{property.title}}</h3>
-	<p ng-bind-html="property.description | unsafe"></p>
-	<div ng-controller="inputCtrl" ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
 </section>

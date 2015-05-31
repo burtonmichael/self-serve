@@ -1,34 +1,11 @@
 angular.module('selfServe.directives', [])
 
-.directive('categories', ['DataService', '$routeParams', function(DataService, $routeParams){
+.directive('alert', function(){
 	return {
-		scope: {},
-		controller: function($scope, DataService, $routeParams){
-			$scope.categories = {};
-			DataService.get().then(function(data) {
-			    $scope.categories = data.categories;
-			});
-			$scope.count = function(category) {
-				var len = 0;
-				for (var o in category.properties) {
-				    len++;
-				}
-				return "properties-length-" + len;
-			}
-			$scope.active = {
-			    category: null,
-			    property: null
-			};
-			$scope.$on('$routeChangeSuccess', function() {
-			    $scope.active.category = $routeParams.category;
-			    $scope.active.property = $routeParams.property;
-			});
-		},
 		restrict: 'A',
-		templateUrl: 'templates/nav-categories.html',
-		replace: false
+		templateUrl: 'templates/property/alert.html'
 	};
-}])
+})
 
 .directive('images', function(){
 	return {
@@ -37,7 +14,7 @@ angular.module('selfServe.directives', [])
 		},
 		controller: "imagesCtrl",
 		restrict: 'A',
-		templateUrl: 'templates/images.html'
+		templateUrl: 'templates/property/images.html'
 	};
 })
 
@@ -48,7 +25,7 @@ angular.module('selfServe.directives', [])
 			value: "="
 		},
 		restrict: 'A',
-		template: '<kbd>&<span class="snippet-key">{{key}}</span>=<span class="snippet-value">{{value}}</span></kbd>',
+		template: '<pre><code>&<span class="snippet-key">{{key}}</span>=<span class="snippet-value">{{value}}</span></code></pre>',
 		replace: true
 	};
 })
@@ -56,6 +33,6 @@ angular.module('selfServe.directives', [])
 .directive('buttons', function(){
 	return {
 		controller: "buttonCtrl",
-		templateUrl: 'templates/inputs/buttons.html'
+		templateUrl: 'templates/property/buttons.html'
 	}
 })

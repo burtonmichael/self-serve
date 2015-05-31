@@ -19,7 +19,7 @@ angular.module('selfServe.services', [])
 	}
 }])
 
-.factory('PropertiesService', ['localStorageService', function(localStorageService){
+.factory('PropertiesService', ['$rootScope', 'localStorageService', function($rootScope, localStorageService){
 
 	var factory = {};
 
@@ -45,16 +45,19 @@ angular.module('selfServe.services', [])
 	factory.setProperty = function(key, value) {
 		localStorageObject[key] = value;
 		localStorageService.set("serve", localStorageObject);
+		$rootScope.$broadcast('property:updated', localStorageObject);
 	}
 
 	factory.resetProperties = function() {
 		localStorageObject = {};
 		localStorageService.set("serve", localStorageObject);
+		$rootScope.$broadcast('property:updated', localStorageObject);
 	}
 
 	factory.resetProperty = function(key) {
 		delete localStorageObject[key];
 		localStorageService.set("serve", localStorageObject);
+		$rootScope.$broadcast('property:updated', localStorageObject);
 	}
 
 	return factory;

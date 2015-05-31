@@ -29,7 +29,7 @@ var selfServe = angular.module('selfServe', [
 			templateUrl: 'templates/reset.html',
 			controller: 'resetCtrl'
 		}).
-		when('/:category', {
+		when('/customise/:category', {
 			templateUrl: 'templates/category.html',
 			controller: 'preloadCtrl',
 			resolve: {
@@ -38,8 +38,8 @@ var selfServe = angular.module('selfServe', [
 				}
 			}
 		}).
-		when('/:category/:property', {
-			templateUrl: 'templates/property.html',
+		when('/customise/:category/:property', {
+			templateUrl: 'templates/property/property.html',
 			controller: 'preloadCtrl',
 			resolve: {
 				preloadData: function(DataService) {
@@ -55,9 +55,9 @@ var selfServe = angular.module('selfServe', [
 
 .run(['$rootScope', '$location', 'PropertiesService',
 	function($rootScope, $location, PropertiesService) {
-		$rootScope.affiliateCode = PropertiesService.getProperty("affiliateCode");
+		var affiliateCode = PropertiesService.getProperty("affiliateCode");
 		$rootScope.$on("$routeChangeStart", function(event, next, current) {
-			if (!$rootScope.affiliateCode) {
+			if (!affiliateCode) {
 				if (next.$$route.templateUrl != "templates/start.html" && next.$$route.templateUrl != "templates/reset.html") {
 					$location.path("/start");
 				}

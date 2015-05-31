@@ -1,14 +1,14 @@
 <button
 	ng-click="setProperty(property.parameter, property.value, property.input.restrict)"
 	class="btn btn-default"
-	ng-class="{ 'btn-success': success, 'btn-danger': attempted && !success }"
+	ng-class="{ 'btn-success': success, 'btn-danger': error }"
 	type="button">
-Save
+	Save
 </button>
 <button
 	ng-if="property.value"
 	ng-click="resetProperty(property.parameter)"
 	class="btn btn-default"
 	type="button">
-Reset
+	Reset
 </button>

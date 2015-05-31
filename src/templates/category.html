@@ -1,12 +1,14 @@
 <section class="leading">
 	<h2>{{category.parameter | title}}</h2>
-	<p>
+	<p class="lead">
 		This is an overview of paramters avaiable in this section. If you wish to view more detail, please select the sub-section from the left.
 	</p>
 </section>
 
-<section ng-repeat="property in category.properties">
-	<h3>{{property.title}}</h3>
-	<p ng-bind-html="property.description | unsafe"></p>
-	<div ng-controller="inputCtrl" ng-include="'templates/inputs/' + property.input.type + '.html'" property="property"></div>
+<section class="card" ng-repeat="property in category.properties">
+	<h3 class="property-title" ng-click="show = !show">{{property.title}}<span ng-class="{'glyphicon-chevron-up': show, 'glyphicon-chevron-down': !show}" class="glyphicon pull-right"></span></h3>
+	<div ng-show="show">
+		<p ng-bind-html="property.description | unsafe"></p>
+		<div ng-controller="inputCtrl" ng-include="'templates/property/inputs/' + property.input.type + '.html'" property="property"></div>
+	</div>
 </section>

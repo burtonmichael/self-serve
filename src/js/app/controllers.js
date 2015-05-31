@@ -64,10 +64,9 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 			animation: true,
 			size: 'sm',
 			templateUrl: 'templates/modals/modal-reset.html',
-			controller: function($scope, $modalInstance, $rootScope, PropertiesService) {
+			controller: function($scope, $modalInstance, PropertiesService) {
 				$scope.confirm = function () {
 					PropertiesService.resetProperties();
-					$rootScope.affiliateCode = undefined;
 					$modalInstance.dismiss();
 				};
 				$scope.close = function () {
@@ -78,14 +77,25 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	};
 }])
 
-.controller('navigationCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
-	$scope.started = $rootScope.affiliateCode;
+.controller('navCtrl', ['$scope', '$rootScope', '$location', 'DataService', 'PropertiesService', function($scope, $rootScope, $location, DataService, PropertiesService){
+	$scope.started = PropertiesService.getProperty('affiliateCode');
 
-	$scope.$watch(function() {
-		return $rootScope.affiliateCode;
-	}, function() {
-		$scope.started = $rootScope.affiliateCode;
-	}, true);
+	DataService.get().then(function(data){
+    	$scope.base = data.base
+    	$scope.categories = data.categories
+    });
+
+	$scope.active = {};
+	
+	$scope.$on('$routeChangeSuccess', function() {
+		$scope.active.page = $location.$$path.split("/")[1]
+		$scope.active.category = $location.$$path.split("/")[2]
+		$scope.active.property = $location.$$path.split("/")[3]
+	});
+
+	$scope.$on('property:updated', function(event, data) {
+		$scope.started = data.affiliateCode
+	});
 }])
 
 .controller('inputCtrl', ['$scope', '$filter', '$sce', 'PropertiesService', function($scope, $filter, $sce, PropertiesService){
@@ -108,22 +118,15 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 		$scope.all = $scope.property.value === "all" ? true : false;
 	}
 
-	$scope.$on('setResponse', function(event, data){
-		console.log(data);
-	})
-
 	$scope.closeAlert = function(index) {
 		$scope.error = null;
 	}
 }])
 
-.controller('buttonCtrl', ['$scope', '$rootScope', 'PropertiesService', function($scope, $rootScope, PropertiesService){
+.controller('buttonCtrl', ['$scope', 'PropertiesService', function($scope, PropertiesService){
 	$scope.setProperty = function(key, value, restrict) {
-		$scope.attempted = true;
-		var value = value;
-		var valid = false;
-		var message = 'Please check and try again.';
-
+		var valid;
+		
 		if (!value) {
         	message = "Enter a value."
         } else {
@@ -136,8 +139,8 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 	                }
 	                break;
 	            case 'number':
-	            	value = parseInt(value);
-	                if (/([0-9])/i.test(value)) {
+	            	testValue = parseInt(value);
+	                if (/([0-9])/i.test(testValue)) {
 	                    valid = true;
 	                } else {
 	                	message = "This value needs to be a number."
@@ -156,10 +159,9 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 		if (valid) {
 			PropertiesService.setProperty(key, value);
 			$scope.success = true;
-			if (key == "affiliateCode") $rootScope.affiliateCode = value;
 		} else {
 			$scope.error = {
-				message: message
+				message: message || 'Please check and try again.'
 			}
 		}
 	}
@@ -170,8 +172,6 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 		$scope.attempted = false;
         $scope.success = false;
         $scope.preset = null;
-		if (key == "affiliateCode") 
-			$rootScope.affiliateCode = undefined;
 	}
 }])
 

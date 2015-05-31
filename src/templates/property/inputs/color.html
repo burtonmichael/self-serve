@@ -1,9 +1,6 @@
+<div alert="error"></div>
 <div class="input-group">
 	<span class="input-group-addon" ng-style="{'background-color': property.value}">&nbsp;&nbsp;</span>
 	<input colorpicker type="text" class="form-control" ng-change="success = null" ng-model="property.value" placeholder="{{property.input.placeholder}}">
 	<span buttons class="input-group-btn"></span>
 </div>
-<alert ng-show="error" type="{{error.type}}" close="closeAlert($index)">
-	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-	<strong>{{error.msg}}</strong>
-</alert>

@@ -1,0 +1,11 @@
+<div alert="error"></div>
+<div class="input-group">
+	<div ng-repeat="option in property.input.options" class="checkbox">
+		<label>
+			<input ng-model="" ng-checked="all" ng-change="all = option.all" type="checkbox" value="">
+			<span ng-if="!option.all">{{option.label}}</span>
+			<strong ng-if="option.all">{{option.label}}</strong>
+		</label>
+	</div>
+	<span buttons class="input-group-btn"></span>
+</div>

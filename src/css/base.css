@@ -1,11 +1,7 @@
 body {
 	font-family: 'Roboto', sans-serif;
 	background-color: #FBFBFB;
-	font-weight: 300;
-}
-
-h1, h2, h3, h4 {
-	font-weight: 300;
+    margin-top: 64px;
 }
 
 .navigation, .navigation ul {
@@ -17,7 +13,7 @@ h1, h2, h3, h4 {
 	list-style: none;
 }
 
-.navigation li a {
+.navigation a {
 	text-decoration: none;
 	font-size: 13px;
 	display: block;
@@ -25,11 +21,7 @@ h1, h2, h3, h4 {
 	color: #333;
 }
 
-.navigation > li > a {
-	font-weight: 400;
-}
-
-section {
+.card {
 	padding: 12px 24px 24px;
 	background-color: #FFF;
 	margin-bottom: 24px;
@@ -37,12 +29,14 @@ section {
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
-.categories > li > a {
-	margin-left: 24px;
+.nav-categories > li > a {
+	margin-left: 32px;
+    border-radius: 40px 0 0 40px;
 }
 
-.properties a {
-	margin-left: 42px;
+.nav-properties a {
+	margin-left: 64px;
+    border-radius: 40px 0 0 40px;
 }
 
 .build li {
@@ -54,11 +48,11 @@ section {
 }
 
 .snippet-key {
-	color: #9DBDC6;
+	color: #2f6f9f;
 }
 
 .snippet-value {
-	color: #FF3D2E;
+	color: #d44950;
 }
 
 .alert-input {
@@ -71,7 +65,7 @@ section {
   transition: all linear 0.3s;
 }
 
-.properties {
+.nav-properties {
 	overflow: hidden;
 }
 
@@ -79,19 +73,19 @@ section {
 	height: 0;
 }
 
-.properties-length-1 {
+.nav-properties-length-1 {
 	height: 48px;
 }
 
-.properties-length-2 {
+.nav-properties-length-2 {
 	height: 96px;
 }
 
-.properties-length-3 {
+.nav-properties-length-3 {
 	height: 144px;
 }
 
-.properties-length-4 {
+.nav-properties-length-4 {
 	height: 192px;
 }
 
@@ -149,4 +143,40 @@ section {
     min-height: 100%;
     position: relative;
     padding-bottom: 160px;
+}
+
+.navigation a:focus {
+    box-shadow: inset -4px 0 0 #2980B9;
+    background-color: #3498DB;
+    font-weight: 700;
+    color: #fff;
+}
+
+.lightbox {
+    display: block;
+    color: #333;
+    -webkit-transition: box-shadow 125ms;
+    -moz-transition: box-shadow 125ms;
+    -ms-transition: box-shadow 125ms;
+    -o-transition: box-shadow 125ms;
+    transition: box-shadow 125ms;
+}
+
+.lightbox:hover,
+.lightbox:focus {
+    outline: 0;
+    box-shadow: 0 4px 12px 1px rgba(0, 0, 0, 0.26);
+}
+
+.lightbox .caption {
+    margin-top: 24px;
+}
+
+.property-title {
+    cursor: pointer;
+    display: block;
+}
+
+.property-title:hover {
+    color: #2980B9;
 }

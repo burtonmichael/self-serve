@@ -1,0 +1,19 @@
+<h2>{{property.title}}</h2>
+<p class="lead" ng-bind-html="property.description | unsafe"></p>
+
+<section class="card">
+    <h3>Property value</h3>
+    <div ng-controller="inputCtrl" ng-include="'templates/property/inputs/' + property.input.type + '.html'" property="property"></div>
+</section>
+
+<div class="snippet">
+	<h3>Url parameter.</h3>
+	<p>The parameter takes the following form in the url.</p>
+	<span snippet key="property.snippet.key" value="property.snippet.value"></span>
+</div>
+
+<section ng-if="property.images.length >= 1">
+	<h3>Images</h3>
+	<p>Here you can see an example of the property in action. Click on the image to enlarge.</p>
+	<div images="property.images"></div>
+</section>
