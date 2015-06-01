@@ -10,5 +10,7 @@
 	<div ng-show="show">
 		<p ng-bind-html="property.description | unsafe"></p>
 		<div ng-controller="inputCtrl" ng-include="'templates/property/inputs/' + property.input.type + '.html'" property="property"></div>
+		<hr>
+		<a type="button" href="#/customise/{{category.parameter}}/{{property.parameter}}" class="btn btn-link btn-sm btn-block">View more information about this property</a>
 	</div>
 </section>

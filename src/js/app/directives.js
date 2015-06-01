@@ -36,6 +36,21 @@ angular.module('selfServe.directives', [])
 	}
 })
 
+.directive('postHeight', function(){
+	return {
+		link: function(scope, element, attributes, controller) {
+			window.addEventListener("message", receiveMessage, false);
+
+			function receiveMessage(event) {
+				if (event.origin !== "http://www.rentalcars.com")
+					return;
+
+				element[0].height = event.data
+			}
+		}
+	}
+})
+
 .directive('lightbox', ['$modal', function($modal){
 	return {
 		scope: {

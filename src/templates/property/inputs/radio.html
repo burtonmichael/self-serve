@@ -1,6 +1,6 @@
 <div alert="error"></div>
 <div class="input-group">
-	<div ng-repeat="option in property.input.options" ng-init="property.value= property.value || 'false'" class="radio">
+	<div ng-repeat="option in property.input.options" class="radio">
 		<label class="radio-inline">
 			<input ng-model="property.value" type="radio" ng-value="option.value" name="property.name">
 			{{option.label}}

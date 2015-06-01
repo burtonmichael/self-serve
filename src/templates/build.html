@@ -1,12 +1,31 @@
-<ul>
-	<li class="build-item" ng-repeat="property in properties | orderBy: 'key'">
-		{{property.key}} - {{property.value | preview}} <span class="build-color glyphicon glyphicon-stop" ng-style="{color: property.value}" ng-if="property.value.indexOf('#') === 0"></span>
-		<button ng-if="property.key !=='affiliateCode'" type="button" ng-click="resetProperty(property.key, $index)" class="btn btn-danger btn-xs">
-			<small class="glyphicon glyphicon-remove"></small>
-		</button>
-	</li>
-</ul>
+<h2>Build</h2>
+<p>
+	Here are your stuff.
+</p>
+<div class="card">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Property name</th>
+				<th>Property value</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="property in properties | orderBy: 'key'">
+				<td><span class="build-color glyphicon glyphicon-stop" ng-style="{color: property.value}" ng-if="property.value.indexOf('#') === 0"></span></td>
+				<td>{{property.key}}</td>
+				<td>{{property.value | preview}}</td>
+				<td>
+					<button ng-if="property.key !=='affiliateCode'" type="button" ng-click="resetProperty(property.key, $index)" class="btn btn-default btn-xs">
+						<small class="glyphicon glyphicon-remove"></small>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
+
+</div>
 <button class="btn btn-success" ng-click="generate()">Generate</button>
-<hr>
-<div class="well" ng-show="url">&lt;iframe src="{{url}}" width="100%" height="1100">&lt;/iframe></div>

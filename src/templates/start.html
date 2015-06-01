@@ -1,7 +1,7 @@
 <section class="leading">
 	<h1>Welcome</h1>
 	<p class="lead">
-		This is an overview of paramters avaiable in this section. If you wish to view more detail, please select the sub-section from the left.
+		This is an overview of parameters avaiable in this section. If you wish to view more detail, please select the sub-section from the left.
 	</p>
 </section>
 
@@ -11,6 +11,6 @@
 	<div ng-controller="inputCtrl" ng-include="'templates/property/inputs/' + property.input.type + '.html'" property="property"></div>
 </section>
 
-<section ng-show="base.affiliateCode.value" class="card">
-	Great!
-</section>
+<div ng-show="hasAffiliateCode" class="alert alert-success">
+	<strong><span class="glyphicon glyphicon-thumbs-up"></span> Great</strong>, you can customise your options on the left, or go straight to generate your iframe.
+</div>

@@ -19,6 +19,12 @@ body {
 	display: block;
 	padding: 15px 0 15px 22px;
 	color: #333;
+    -webkit-transition: box-shadow 125ms;
+    -moz-transition: box-shadow 125ms;
+    -ms-transition: box-shadow 125ms;
+    -o-transition: box-shadow 125ms;
+    transition: box-shadow 125ms;
+    
 }
 
 .card {
@@ -29,14 +35,20 @@ body {
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
+.card .card {
+    background-color: rgba(0, 0, 0, 0.018);
+}
+
+.navigation a {
+    border-radius: 40px 0 0 40px;
+}
+
 .nav-categories > li > a {
 	margin-left: 32px;
-    border-radius: 40px 0 0 40px;
 }
 
 .nav-properties a {
 	margin-left: 64px;
-    border-radius: 40px 0 0 40px;
 }
 
 .build li {
@@ -164,7 +176,6 @@ body {
 
 .lightbox:hover {
     text-decoration: none;
-    
 }
 
 .lightbox.card:hover,
@@ -188,4 +199,72 @@ body {
 
 .modal-body img {
     margin: 0 auto;
+}
+
+
+
+.nav-start a {
+    box-shadow: inset -4px 0 0 #286090;
+}
+
+.nav-start a:hover {
+    box-shadow: inset -8px 0 0 #286090;
+}
+
+.nav-start a:focus {
+    box-shadow: inset -8px 0 0 #286090;
+    background-color: #337AB7;
+}
+
+
+
+.nav-customise a {
+    box-shadow: inset -4px 0 0 #449D44;
+}
+
+.nav-customise a:hover {
+    box-shadow: inset -8px 0 0 #449D44;
+}
+
+.nav-customise a:focus {
+    box-shadow: inset -8px 0 0 #449D44;
+    background-color: #5CB85C;
+}
+
+
+
+.nav-build a {
+    box-shadow: inset -4px 0 0 #31B0D5;
+}
+
+.nav-build a:hover {
+    box-shadow: inset -8px 0 0 #31B0D5;
+}
+
+.nav-build a:focus {
+    box-shadow: inset -8px 0 0 #31B0D5;
+    background-color: #5BC0DE;
+}
+
+
+
+.nav-reset a {
+    box-shadow: inset -4px 0 0 #C9302C;
+}
+
+.nav-reset a:hover {
+    box-shadow: inset -8px 0 0 #C9302C;
+}
+
+.nav-reset a:focus {
+    box-shadow: inset -8px 0 0 #C9302C;
+    background-color: #D9534F;
+}
+
+.nav-category.active {
+    background-color: #C6E6C6;
+}
+
+.nav-category.active ul {
+    background-color: #E3F3E3;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="selfServe">
 
 <head>
     <meta charset="UTF-8">
@@ -14,15 +14,15 @@
     <!-- endinject -->
 </head>
 
-<body ng-app="selfServe">
+<body ng-controller="mainCtrl">
     <div ng-controller="navCtrl" class="side-nav">
         <div class="side-nav-inner">
             <ul class="navigation">
-                <li ng-class="{'active': active.page == 'start'}">
+                <li class="nav-start" ng-class="{'active': active.page == 'start'}">
                     <a href="#/start">Start</a>
                 </li>
                 <div ng-if="hasAffiliateCode">
-                    <li ng-class="{'active': active.page == 'customise'}">
+                    <li class="nav-customise" ng-class="{'active': active.page == 'customise'}">
                         <a href="#/customise">Customise</a>
                         <ul ng-show="active.page === 'customise'" class="nav-categories" active="active">
                             <li class="nav-category" ng-class="{'active': active.category == category.parameter}" ng-repeat="category in categories">
@@ -35,11 +35,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li ng-class="{'active': active.page == 'build'}">
+                    <li class="nav-build" ng-class="{'active': active.page == 'build'}">
                         <a href="#/build">Build</a>
                     </li>
                 </div>
-                <li ng-class="{'active': active.page == 'reset'}">
+                <li class="nav-reset" ng-class="{'active': active.page == 'reset'}">
                     <a href="#/reset">Reset</a>
                 </li>
             </ul>
@@ -47,7 +47,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-4">
                 <ng-view></ng-view>
             </div>
         </div>

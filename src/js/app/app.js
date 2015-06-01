@@ -14,12 +14,10 @@ var selfServe = angular.module('selfServe', [
 	function($routeProvider) {
 		$routeProvider.
 		when('/start', {
-			templateUrl: 'templates/start.html',
-			controller: 'mainCtrl'
+			templateUrl: 'templates/start.html'
 		}).
 		when('/customise', {
-			templateUrl: 'templates/customise.html',
-			controller: 'mainCtrl'
+			templateUrl: 'templates/customise.html'
 		}).
 		when('/build', {
 			templateUrl: 'templates/build.html',
@@ -55,8 +53,8 @@ var selfServe = angular.module('selfServe', [
 
 .run(['$rootScope', '$location', 'PropertiesService',
 	function($rootScope, $location, PropertiesService) {
-		var affiliateCode = PropertiesService.getProperty("affiliateCode");
 		$rootScope.$on("$routeChangeStart", function(event, next, current) {
+			var affiliateCode = PropertiesService.getProperty("affiliateCode");
 			if (!affiliateCode) {
 				if (next.$$route.templateUrl != "templates/start.html" && next.$$route.templateUrl != "templates/reset.html") {
 					$location.path("/start");

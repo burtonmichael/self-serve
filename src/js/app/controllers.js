@@ -1,10 +1,14 @@
 angular.module('selfServe.controllers', ['ngAnimate'])
 
-.controller('mainCtrl', ['$scope', '$routeParams', 'DataService', function($scope, $routeParams, DataService){
+.controller('mainCtrl', ['$scope', '$rootScope', '$routeParams', 'DataService', function($scope, $rootScope, $routeParams, DataService){
     DataService.get().then(function(data){
-    	$scope.base = data.base
-    	$scope.categories = data.categories
+    	$scope.base = data.base;
+    	$scope.categories = data.categories;
     });
+
+	$scope.$on('property:updated', function(event, data) {
+		$scope.hasAffiliateCode = data.affiliateCode
+	});
 }])
 
 .controller('preloadCtrl', ['$scope', '$routeParams', 'preloadData', function($scope, $routeParams, preloadData){
@@ -15,11 +19,12 @@ angular.module('selfServe.controllers', ['ngAnimate'])
     }
 }])
 
-.controller('buildCtrl', ['$scope', '$modal', 'PropertiesService', function($scope, $modal, PropertiesService){
+.controller('buildCtrl', ['$scope', '$modal', 'PropertiesService', '$sce', function($scope, $modal, PropertiesService, $sce){
 	$scope.properties = PropertiesService.getProperties();
 
 	$scope.generate = function() {
 		var modalInstance = $modal.open({
+			size: 'lg',
 			animation: true,
 			templateUrl: 'templates/modals/modal-build.html',
 			controller: function($scope, $modalInstance, url) {
@@ -52,7 +57,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 
 						parameters += value;
 					})
-					return url + parameters.substr(1);
+					return $sce.trustAsResourceUrl(url + parameters.substr(1));
 				}
 			}
 		});
@@ -93,7 +98,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
     });
 
 	$scope.active = {};
-	
+
 	$scope.$on('$routeChangeSuccess', function() {
 		$scope.active.page = $location.$$path.split("/")[1]
 		$scope.active.category = $location.$$path.split("/")[2]
@@ -120,10 +125,16 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 
 	$scope.setCheckboxes = function() {
 		angular.forEach($scope.property.input.options, function(option){
-			if ($scope.property.value.indexOf(option.value) >= 0) {
-				option.selected = true;
+			if ($scope.property.value) {
+				if ($scope.property.value.indexOf(option.value) >= 0) {
+					option.selected = true;
+				} else {
+					option.selected = false;
+				}
 			} else {
-				option.selected = false;
+				if ($scope.property.input.default === option.value) {
+					$scope.property.value = option.value;
+				}
 			}
 		})
 	}
@@ -132,8 +143,8 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 		case "select":
 			if ($scope.property.value) $scope.preset = $filter('filter')($scope.property.input.options, {value: $scope.property.value});
 			break;
-		case "checkbox":
 		case "radio":
+		case "checkbox":
 			$scope.setCheckboxes();
 			$scope.$on('property:updated', function(event, data) {
 				$scope.setCheckboxes();

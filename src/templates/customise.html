@@ -8,14 +8,32 @@
 	<p>Use the text filter below to find a specific property or select sub category from the navigator.</p>
 	<div class="input-group">
 		<div class="input-group-addon">Filter</div>
-		<input type="text" class="form-control" ng-model="search">
+		<input type="text" class="form-control" ng-model="filter">
 	</div>
 </section>
 
-<section class="card" ng-repeat="property in filtered = (categories | properties | filter:search | orderBy:'parameter')">
+
+<div ng-repeat="category in (filtered = categories | array | filter: filter)">
+	<div class="card">
+		<h3>{{category.parameter | title}}</h3>
+		<hr>
+		<section class="card" ng-repeat="property in (filtered = category.properties | array | filter: $parent.filter)">
+			<h4 class="property-title" ng-click="show = !show">{{property.title}}<span ng-class="{'glyphicon-chevron-up': show, 'glyphicon-chevron-down': !show}" class="glyphicon pull-right"></span></h4>
+			<div ng-show="show">
+				<p ng-bind-html="property.description | unsafe"></p>
+				<div ng-controller="inputCtrl" ng-include="'templates/property/inputs/' + property.input.type + '.html'" property="property"></div>
+				<hr>
+				<a type="button" href="#/customise/{{category.parameter}}/{{property.parameter}}" class="btn btn-link btn-sm btn-block">View more information about this property</a>
+			</div>
+		</section>
+	</div>
+</div>
+
+<!-- <section class="card" ng-repeat="property in filtered = (categories | properties | filter:search | orderBy:'parameter')">
 	<h3 class="property-title" ng-click="show = !show">{{property.title}}<span ng-class="{'glyphicon-chevron-up': show, 'glyphicon-chevron-down': !show}" class="glyphicon pull-right"></span></h3>
 	<div ng-show="show">
 		<p ng-bind-html="property.description | unsafe"></p>
 		<div ng-controller="inputCtrl" ng-include="'templates/property/inputs/' + property.input.type + '.html'" property="property"></div>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
 	</div>
-</section>
+</section> -->
