@@ -30,6 +30,8 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 			controller: function($scope, $modalInstance, url) {
 				$scope.url = url;
 
+				$scope.height = null;
+
 				$scope.preview = function () {
 					window.open(url);
 				};
@@ -52,7 +54,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 						}
 
 						if (value.indexOf('#') === 0) {
-							value += value.substr(1);
+							value = value.substr(1);
 						}
 
 						parameters += value;

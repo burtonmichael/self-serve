@@ -17,14 +17,13 @@ body {
 	text-decoration: none;
 	font-size: 13px;
 	display: block;
-	padding: 15px 0 15px 22px;
+	padding: 15px 0 15px 15px;
 	color: #333;
     -webkit-transition: box-shadow 125ms;
     -moz-transition: box-shadow 125ms;
     -ms-transition: box-shadow 125ms;
     -o-transition: box-shadow 125ms;
     transition: box-shadow 125ms;
-    
 }
 
 .card {
@@ -44,11 +43,11 @@ body {
 }
 
 .nav-categories > li > a {
-	margin-left: 32px;
+	margin-left: 24px;
 }
 
 .nav-properties a {
-	margin-left: 64px;
+	margin-left: 48px;
 }
 
 .build li {

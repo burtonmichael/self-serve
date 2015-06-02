@@ -8,6 +8,7 @@
 <section class="card" ng-repeat="property in category.properties">
 	<h3 class="property-title" ng-click="show = !show">{{property.title}}<span ng-class="{'glyphicon-chevron-up': show, 'glyphicon-chevron-down': !show}" class="glyphicon pull-right"></span></h3>
 	<div ng-show="show">
+		<hr>
 		<p ng-bind-html="property.description | unsafe"></p>
 		<div ng-controller="inputCtrl" ng-include="'templates/property/inputs/' + property.input.type + '.html'" property="property"></div>
 		<hr>
