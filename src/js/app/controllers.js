@@ -32,10 +32,6 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 
 				$scope.height = null;
 
-				$scope.preview = function () {
-					window.open(url);
-				};
-
 				$scope.close = function () {
 					$modalInstance.dismiss('close');
 				};
@@ -169,7 +165,7 @@ angular.module('selfServe.controllers', ['ngAnimate'])
 .controller('buttonCtrl', ['$scope', 'PropertiesService', function($scope, PropertiesService){
 	$scope.setProperty = function(key, value, restrict) {
 		var valid;
-		
+
 		if (!value) {
         	message = "Enter a value."
         } else {

@@ -44,8 +44,7 @@ angular.module('selfServe.directives', [])
 			function receiveMessage(event) {
 				if (event.origin !== "http://www.rentalcars.com")
 					return;
-				scope.height = event.data;
-				scope.$apply();
+				element[0].height = event.data;
 			}
 		}
 	}

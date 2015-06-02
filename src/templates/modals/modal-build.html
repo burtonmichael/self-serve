@@ -4,8 +4,9 @@
 <div class="modal-body">
     <pre>&lt;iframe src="{{url}}" width="100%" height="{{height || 1100}}">&lt;/iframe></pre>
 </div>
-<iframe post-height ng-src="{{url}}" width="100%" height="{{height}}" scrolling="no" frameborder="0"></iframe>
+<iframe ng-show="preview" post-height ng-src="{{url}}" width="100%" scrolling="no" frameborder="0"></iframe>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="preview()">Preview</button>
+    <button ng-show="!preview" class="btn btn-primary" ng-click="preview = true">Preview</button>
+    <button ng-show="preview" class="btn btn-primary" ng-click="preview = false">Preview</button>
     <button class="btn btn-default" ng-click="close()">Close</button>
 </div>

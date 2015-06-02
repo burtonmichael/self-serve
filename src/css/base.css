@@ -17,7 +17,7 @@ body {
 	text-decoration: none;
 	font-size: 13px;
 	display: block;
-	padding: 15px 0 15px 15px;
+	padding: 15px 0 15px 22px;
 	color: #333;
     -webkit-transition: box-shadow 125ms;
     -moz-transition: box-shadow 125ms;
@@ -156,13 +156,6 @@ body {
     padding-bottom: 160px;
 }
 
-.navigation a:focus {
-    box-shadow: inset -4px 0 0 #2980B9;
-    background-color: #3498DB;
-    font-weight: 700;
-    color: #fff;
-}
-
 .lightbox.card {
     display: block;
     color: #333;
@@ -201,6 +194,14 @@ body {
 }
 
 
+
+.navigation a:focus {
+    box-shadow: inset -4px 0 0 #2980B9;
+    background-color: #3498DB;
+    font-weight: 700;
+    color: #fff;
+    outline: 0;
+}
 
 .nav-start a {
     box-shadow: inset -4px 0 0 #286090;
@@ -266,4 +267,8 @@ body {
 
 .nav-category.active ul {
     background-color: #E3F3E3;
+}
+
+.active > a {
+    font-weight: bold;
 }
